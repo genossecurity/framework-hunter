@@ -1,0 +1,201 @@
+# batch 1: top 200 by stars from repos.txt, repo name contains "mcp"
+zcaceres/markdownify-mcp  # stars=3000 lang=TypeScript pushed=2026-10-26 src=github
+openags/paper-search-mcp  # stars=2979 lang=Python pushed=2026-10-02 src=github
+jgravelle/jcodemunch-mcp  # stars=2831 lang=Python pushed=2026-11-03 src=github
+chrisryugj/korean-law-mcp  # stars=2829 downloads=10294 lang=TypeScript pushed=2026-11-01 npm=korean-law-mcp src=github+npm
+sparfenyuk/mcp-proxy  # stars=2814 lang=Python pushed=2026-11-02 src=github
+metatool-ai/metamcp  # stars=2744 lang=TypeScript pushed=2026-06-22 src=github
+brightdata/brightdata-mcp  # stars=2706 lang=JavaScript pushed=2026-11-02 src=github
+southleft/figma-console-mcp  # stars=2646 downloads=84104 lang=TypeScript pushed=2026-10-29 npm=figma-console-mcp src=github+npm
+samanhappy/mcphub  # stars=2620 lang=TypeScript pushed=2026-11-03 src=github
+dsphper/lanhu-mcp  # stars=2546 lang=Python pushed=2026-10-27 src=github
+knowsuchagency/mcp2cli  # stars=2428 lang=Python pushed=2026-10-28 src=github
+Joooook/12306-mcp  # stars=2421 lang=JavaScript pushed=2026-07-31 src=github
+jamubc/gemini-mcp-tool  # stars=2295 downloads=5238 lang=TypeScript pushed=2026-07-21 npm=gemini-mcp-tool src=github+npm
+Dicklesworthstone/mcp_agent_mail  # stars=2227 lang=Python pushed=2026-11-01 src=github
+chatmcp/mcpso  # stars=2115 lang=TypeScript pushed=2026-10-25 src=github
+AminForou/mcp-gsc  # stars=2096 lang=Python pushed=2026-09-15 src=github
+vmoranv/jshookmcp  # stars=2095 lang=TypeScript pushed=2026-11-02 src=github
+zereight/gitlab-mcp  # stars=2080 lang=TypeScript pushed=2026-11-02 src=github
+doobidoo/mcp-memory-service  # stars=2063 lang=Python pushed=2026-11-02 src=github
+MicrosoftDocs/mcp  # stars=1968 lang=TypeScript pushed=2026-10-30 src=github
+chigwell/telegram-mcp  # stars=1965 lang=Python pushed=2026-10-31 src=github
+arabold/docs-mcp-server  # stars=1852 downloads=2561 lang=TypeScript pushed=2026-11-01 npm=@arabold/docs-mcp-server src=github+npm
+Mcp-Brasil/mcp-brasil  # stars=1852 lang=Python pushed=2026-09-19 src=github
+jau123/MeiGen-AI-Design-MCP  # stars=1796 lang=TypeScript pushed=2026-11-01 src=github
+mukul975/cve-mcp-server  # stars=1735 lang=Python pushed=2026-10-01 src=github
+supermemoryai/supermemory-mcp  # stars=1728 lang=TypeScript pushed=2026-10-02 src=github
+punkpeye/mcp-remote  # stars=1661 lang=TypeScript pushed=2026-11-02 src=github
+svnscha/mcp-windbg  # stars=1646 lang=Python pushed=2026-10-28 src=github
+nicobailon/pi-mcp-adapter  # stars=1640 lang=TypeScript pushed=2026-10-29 src=github
+Flux159/mcp-server-kubernetes  # stars=1610 downloads=29625 lang=TypeScript pushed=2026-10-26 npm=mcp-server-kubernetes src=github+npm
+datagouv/datagouv-mcp  # stars=1603 lang=Python pushed=2026-10-20 src=github
+MiniMax-AI/MiniMax-MCP  # stars=1595 lang=Python pushed=2026-08-20 src=github
+qdrant/mcp-server-qdrant  # stars=1562 lang=Python pushed=2026-09-04 src=github
+robotmcp/ros-mcp-server  # stars=1511 lang=Python pushed=2026-11-02 src=github
+designcomputer/mysql_mcp_server  # stars=1405 lang=Python pushed=2026-10-28 src=github
+caol64/wenyan-mcp  # stars=1352 lang=JavaScript pushed=2026-09-20 src=github
+basementstudio/xmcp  # stars=1348 downloads=23419 lang=TypeScript pushed=2026-10-28 npm=xmcp src=github+npm
+pipeboard-co/meta-ads-mcp  # stars=1347 lang=Python pushed=2026-10-20 src=github
+ihor-sokoliuk/mcp-searxng  # stars=1344 downloads=17616 lang=TypeScript pushed=2026-11-02 npm=mcp-searxng src=github+npm
+datalayer/jupyter-mcp-server  # stars=1319 lang=Python pushed=2026-11-01 src=github
+cookjohn/zotero-mcp  # stars=1259 lang=TypeScript pushed=2026-09-09 src=github
+xyTom/coding-tools-mcp  # stars=1220 lang=Python pushed=2026-10-29 src=github
+ref-tools/ref-tools-mcp  # stars=1183 lang=TypeScript pushed=2026-10-24 src=github
+mongodb-js/mongodb-mcp-server  # stars=1155 downloads=130853 lang=TypeScript pushed=2026-11-02 npm=@mongodb-js/mcp-types src=github+npm
+atlassian/atlassian-mcp-server  # stars=1140 lang=JavaScript pushed=2026-10-29 src=github
+cisco-ai-defense/mcp-scanner  # stars=1106 lang=Python pushed=2026-10-30 src=github
+apify/mcpc  # stars=1082 lang=TypeScript pushed=2026-10-31 src=github
+ArcadeAI/arcade-mcp  # stars=1074 lang=Python pushed=2026-10-30 src=github
+marc-shade/world-intel-mcp  # stars=1057 lang=Python pushed=2026-10-18 src=github
+alpacahq/alpaca-mcp-server  # stars=1055 lang=Python pushed=2026-10-27 src=github
+cloudflare/mcp  # stars=1038 lang=TypeScript pushed=2026-11-03 src=github
+pathintegral-institute/mcpm.sh  # stars=1021 lang=Python pushed=2026-10-25 src=github
+xing5/mcp-google-sheets  # stars=1016 lang=Python pushed=2026-05-14 src=github
+sirkirby/unifi-mcp  # stars=989 lang=Python pushed=2026-11-02 src=github
+neo4j-contrib/mcp-neo4j  # stars=989 lang=Python pushed=2026-09-09 src=github
+rohitg00/kubectl-mcp-server  # stars=967 lang=Python pushed=2026-10-22 src=github
+arben-adm/mcp-sequential-thinking  # stars=959 lang=Python pushed=2026-10-23 src=github
+suekou/mcp-notion-server  # stars=925 lang=TypeScript pushed=2026-07-31 src=github
+CursorTouch/Android-MCP  # stars=912 lang=Python pushed=2026-10-27 src=github
+jina-ai/MCP  # stars=899 lang=TypeScript pushed=2026-10-15 src=github
+feder-cr/invisible_playwright_mcp  # stars=890 lang=Python pushed=2026-10-21 src=github
+artokun/comfyui-mcp  # stars=887 downloads=14742 lang=TypeScript pushed=2026-11-02 npm=comfyui-mcp src=github+npm
+shaneholloman/mcp-knowledge-graph  # stars=886 lang=JavaScript pushed=2026-05-29 src=github
+karanb192/reddit-mcp-buddy  # stars=874 lang=TypeScript pushed=2026-11-02 src=github
+diivi/aseprite-mcp  # stars=872 lang=Python pushed=2026-10-21 src=github
+utensils/mcp-nixos  # stars=872 lang=Python pushed=2026-10-26 src=github
+guangxiangdebizi/FinanceMCP  # stars=868 lang=TypeScript pushed=2026-11-02 src=github
+Get-Concord-AI/concord-mcp  # stars=868 lang=TypeScript pushed=2026-11-02 src=github
+gethopp/figma-mcp-bridge  # stars=863 lang=TypeScript pushed=2026-10-21 src=github
+kontext-security/browser-use-mcp-server  # stars=849 lang=Python pushed=2026-05-20 src=github
+vercel/next-devtools-mcp  # stars=835 downloads=155148 lang=TypeScript pushed=2026-09-15 npm=next-devtools-mcp src=github+npm
+alexander-zuev/supabase-mcp-server  # stars=835 lang=Python pushed=2026-08-21 src=github
+jonigl/mcp-client-for-ollama  # stars=833 lang=Python pushed=2026-10-13 src=github
+zinja-coder/jadx-mcp-server  # stars=829 lang=Python pushed=2026-10-19 src=github
+mnemox-ai/idea-reality-mcp  # stars=828 lang=Python pushed=2026-09-18 src=github
+hetpatel-11/Adobe_Premiere_Pro_MCP  # stars=806 lang=TypeScript pushed=2026-11-02 src=github
+line/line-bot-mcp-server  # stars=797 downloads=3398 lang=TypeScript pushed=2026-11-02 npm=@line/line-bot-mcp-server src=github+npm
+alisaitteke/photoshop-mcp  # stars=791 lang=TypeScript pushed=2026-11-01 src=github
+HelpCode-ai/anythingmcp  # stars=771 lang=TypeScript pushed=2026-11-02 src=github
+LSTM-Kirigaya/openmcp-client  # stars=751 lang=TypeScript pushed=2026-06-04 src=github
+cso1z/Feishu-MCP  # stars=745 lang=TypeScript pushed=2026-10-24 src=github
+caiovicentino/polymarket-mcp-server  # stars=736 lang=Python pushed=2026-09-20 src=github
+rekog-labs/MCP-Nest  # stars=727 lang=TypeScript pushed=2026-10-29 src=github
+wshobson/maverick-mcp  # stars=717 lang=Python pushed=2026-11-02 src=github
+zinja-coder/apktool-mcp-server  # stars=706 lang=Python pushed=2026-07-02 src=github
+cyanheads/obsidian-mcp-server  # stars=698 downloads=10987 lang=TypeScript pushed=2026-10-31 npm=obsidian-mcp-server src=github+npm
+daobataotie/CAD-MCP  # stars=664 lang=Python pushed=2026-10-27 src=github
+hustcc/mcp-mermaid  # stars=647 downloads=1627 lang=TypeScript pushed=2026-05-15 npm=mcp-mermaid src=github+npm
+tuannvm/codex-mcp-server  # stars=647 downloads=1500 lang=TypeScript pushed=2026-05-25 npm=codex-mcp-server src=github+npm
+redis/mcp-redis  # stars=641 lang=Python pushed=2026-10-26 src=github
+GoogleCloudPlatform/cloud-run-mcp  # stars=637 lang=JavaScript pushed=2026-11-02 src=github
+RekklesNA/ProxmoxMCP-Plus  # stars=635 lang=Python pushed=2026-11-01 src=github
+StuMason/coolify-mcp  # stars=617 lang=TypeScript pushed=2026-11-02 src=github
+dbt-labs/dbt-mcp  # stars=616 lang=Python pushed=2026-11-02 src=github
+8beeeaaat/touchdesigner-mcp  # stars=610 downloads=3345 lang=TypeScript pushed=2026-10-31 npm=touchdesigner-mcp-server src=github+npm
+argoproj-labs/mcp-for-argocd  # stars=602 downloads=26500 lang=TypeScript pushed=2026-10-16 npm=argocd-mcp src=github+npm
+jasonjgardner/blockbench-mcp-plugin  # stars=599 lang=TypeScript pushed=2026-10-25 src=github
+harish-gaggar/mcp-server-gateway  # stars=590 lang=Python pushed=2026-10-03 src=github
+spences10/mcp-sequentialthinking-tools  # stars=586 lang=TypeScript pushed=2026-10-30 src=github
+microsoft/DebugMCP  # stars=580 lang=TypeScript pushed=2026-10-25 src=github
+neiltron/apple-health-mcp  # stars=575 lang=TypeScript pushed=2026-10-02 src=github
+kanaworksai-hue/audio-studio-mcp  # stars=569 lang=Python pushed=2026-10-24 src=github
+ooples/token-optimizer-mcp  # stars=566 lang=JavaScript pushed=2026-11-01 src=github
+oOo0oOo/lean-lsp-mcp  # stars=545 lang=Python pushed=2026-10-31 src=github
+mozilla/firefox-devtools-mcp  # stars=541 lang=TypeScript pushed=2026-11-02 src=github
+google/mcp-security  # stars=538 lang=Python pushed=2026-11-01 src=github
+anyproto/anytype-mcp  # stars=537 downloads=1425 lang=TypeScript pushed=2026-11-02 npm=@anyproto/anytype-mcp src=github+npm
+AnkleBreaker-Studio/unity-mcp-server  # stars=534 lang=JavaScript pushed=2026-10-23 src=github
+sv-number/mcp-server  # stars=533 lang=JavaScript pushed=2026-08-10 src=github
+bvisible/mcp-ssh-manager  # stars=531 lang=JavaScript pushed=2026-11-01 src=github
+chrisdoc/hevy-mcp  # stars=530 lang=TypeScript pushed=2026-11-02 src=github
+pab1it0/prometheus-mcp-server  # stars=522 lang=Python pushed=2026-11-03 src=github
+jobsonlook/xhs-mcp  # stars=521 lang=JavaScript pushed=2026-10-29 src=github
+salemalem/npmscan-mcp-plugin  # stars=515 lang=TypeScript pushed=2026-11-02 src=github
+appium/appium-mcp  # stars=513 downloads=18092 lang=TypeScript pushed=2026-11-02 npm=appium-mcp src=github+npm
+tugcantopaloglu/godot-mcp  # stars=508 lang=TypeScript pushed=2026-10-09 src=github
+VikashLoomba/copilot-mcp  # stars=507 lang=TypeScript pushed=2026-06-15 src=github
+MHaggis/Security-Detections-MCP  # stars=505 lang=TypeScript pushed=2026-06-16 src=github
+PV-Bhat/vibe-check-mcp-server  # stars=503 lang=TypeScript pushed=2026-11-01 src=github
+GlitterKill/sdl-mcp  # stars=497 lang=TypeScript pushed=2026-10-29 src=github
+jkawamoto/mcp-youtube-transcript  # stars=494 lang=Python pushed=2026-10-28 src=github
+cablate/mcp-google-map  # stars=487 lang=TypeScript pushed=2026-10-22 src=github
+jumodada/Drissionpage-MCP-Server  # stars=484 lang=Python pushed=2026-10-31 src=github
+leancoderkavy/premiere-pro-mcp  # stars=472 downloads=6116 lang=TypeScript pushed=2026-11-01 npm=premiere-pro-mcp src=github+npm
+eval-sys/mcpmark  # stars=470 lang=Python pushed=2026-06-12 src=github
+aaronsb/obsidian-mcp-plugin  # stars=468 lang=TypeScript pushed=2026-11-02 src=github
+InditexTech/mcp-teams-server  # stars=465 lang=Python pushed=2026-10-29 src=github
+GTAI-1/flow-mcp  # stars=462 lang=TypeScript pushed=2026-10-23 src=github
+domdomegg/airtable-mcp-server  # stars=456 lang=TypeScript pushed=2026-10-25 src=github
+mondaycom/mcp  # stars=436 downloads=2619 lang=TypeScript pushed=2026-11-02 npm=@mondaydotcomorg/monday-api-mcp src=github+npm
+shinpr/mcp-local-rag  # stars=429 downloads=4578 lang=TypeScript pushed=2026-10-30 npm=mcp-local-rag src=github+npm
+robcerda/monarch-mcp-server  # stars=429 lang=Python pushed=2026-10-26 src=github
+erpipe-org/mcp-odoo  # stars=426 lang=Python pushed=2026-08-25 src=github
+Dokploy/mcp  # stars=419 downloads=3017 lang=TypeScript pushed=2026-09-23 npm=@dokploy/mcp src=github+npm
+activeing123/mcptoon  # stars=418 lang=Python pushed=2026-10-31 src=github
+drfccv/mcp-server-12306  # stars=417 lang=Python pushed=2026-09-30 src=github
+DeHor-Labs/mcp-fiscal-brasil  # stars=412 lang=Python pushed=2026-11-01 src=github
+ivnvxd/mcp-server-odoo  # stars=411 lang=Python pushed=2026-11-01 src=github
+Shelpuk-AI-Technology-Consulting/kindly-web-search-mcp-server  # stars=403 lang=Python pushed=2026-10-19 src=github
+cbcoutinho/nextcloud-mcp-server  # stars=401 lang=Python pushed=2026-11-02 src=github
+INSANE0777/Awwwards-mcp  # stars=400 lang=TypeScript pushed=2026-11-02 src=github
+massive-com/mcp_massive  # stars=400 lang=Python pushed=2026-10-08 src=github
+Tiberriver256/mcp-server-azure-devops  # stars=398 lang=TypeScript pushed=2026-11-02 src=github
+XiaoPuOuO/openchatx-mcp  # stars=394 lang=TypeScript pushed=2026-10-26 src=github
+domdomegg/computer-use-mcp  # stars=392 downloads=2132 lang=TypeScript pushed=2026-10-25 npm=computer-use-mcp src=github+npm
+healkeiser/fxhoudinimcp  # stars=392 lang=Python pushed=2026-11-01 src=github
+BlockRunAI/blockrun-mcp  # stars=391 lang=TypeScript pushed=2026-11-03 src=github
+stefanoamorelli/sec-edgar-mcp  # stars=384 lang=Python pushed=2026-11-01 src=github
+ahmedeltaher/azan-mcp  # stars=382 lang=Python pushed=2026-06-02 src=github
+mcpdotdirect/evm-mcp-server  # stars=379 lang=TypeScript pushed=2026-10-03 src=github
+tae0y/real-estate-mcp  # stars=379 lang=Python pushed=2026-07-18 src=github
+Wh1isper/mcp-email-server  # stars=375 lang=Python pushed=2026-11-02 src=github
+aws/mcp-proxy-for-aws  # stars=368 lang=Python pushed=2026-11-02 src=github
+tableau/tableau-mcp  # stars=365 lang=TypeScript pushed=2026-11-03 src=github
+Alex2Yang97/yahoo-finance-mcp  # stars=365 lang=Python pushed=2026-09-19 src=github
+bx33661/Wireshark-MCP  # stars=365 lang=Python pushed=2026-11-01 src=github
+DMontgomery40/deepseek-mcp-server  # stars=362 downloads=669 lang=TypeScript pushed=2026-10-30 npm=deepseek-mcp-server src=github+npm
+cl0nazepamm/3dsmax-mcp  # stars=360 lang=Python pushed=2026-10-31 src=github
+spences10/mcp-omnisearch  # stars=358 lang=TypeScript pushed=2026-10-31 src=github
+apache/doris-mcp-server  # stars=356 lang=Python pushed=2026-10-30 src=github
+makeplane/plane-mcp-server  # stars=355 downloads=1095 lang=Python pushed=2026-11-02 npm=@makeplane/plane-mcp-server src=github+npm
+voska/hass-mcp  # stars=351 lang=Python pushed=2026-11-02 src=github
+ergut/mcp-logseq  # stars=350 lang=Python pushed=2026-09-27 src=github
+hmmhmmhm/daiso-mcp  # stars=346 lang=TypeScript pushed=2026-11-02 src=github
+andrea9293/mcp-documentation-server  # stars=343 lang=TypeScript pushed=2026-08-27 src=github
+carterlasalle/mac_messages_mcp  # stars=343 lang=Python pushed=2026-10-30 src=github
+InditexTech/mcp-server-simulator-ios-idb  # stars=342 lang=TypeScript pushed=2026-10-29 src=github
+eyalzh/browser-control-mcp  # stars=340 lang=TypeScript pushed=2026-08-23 src=github
+sunriseapps/imagesorcery-mcp  # stars=335 lang=Python pushed=2026-05-19 src=github
+Mats2208/MCP-Packet-Tracer  # stars=334 lang=Python pushed=2026-10-30 src=github
+heizaheiza/Charles-mcp  # stars=329 lang=Python pushed=2026-06-23 src=github
+hypothesi/mcp-server-tauri  # stars=329 lang=TypeScript pushed=2026-10-22 src=github
+postmanlabs/postman-mcp-server  # stars=325 downloads=16923 lang=TypeScript pushed=2026-10-30 npm=@postman/postman-mcp-server src=github+npm
+Comfy-Org/comfy-mcp  # stars=323 lang=Python pushed=2026-11-01 src=github
+proxy-intell/facebook-ads-library-mcp  # stars=320 lang=Python pushed=2026-11-03 src=github
+saurabhsharma2u/search-console-mcp  # stars=319 lang=TypeScript pushed=2026-10-21 src=github
+jordanburke/reddit-mcp-server  # stars=318 downloads=4179 lang=TypeScript pushed=2026-10-31 npm=reddit-mcp-server src=github+npm
+DAWNCR0W/affine-mcp-server  # stars=318 downloads=1163 lang=JavaScript pushed=2026-11-02 npm=affine-mcp-server src=github+npm
+nanbingxyz/mcpsvr  # stars=314 lang=TypeScript pushed=2026-11-02 src=github
+wiresage/mikrotik-mcp  # stars=313 lang=Python pushed=2026-11-01 src=github
+songconmaisaix31-design/mcpet  # stars=313 lang=Python pushed=2026-10-29 src=github
+FradSer/mcp-server-mas-sequential-thinking  # stars=305 lang=Python pushed=2026-10-27 src=github
+bitwarden/mcp-server  # stars=304 downloads=1376 lang=TypeScript pushed=2026-11-02 npm=@bitwarden/mcp-server src=github+npm
+noskillish/bankmcp  # stars=298 lang=TypeScript pushed=2026-10-22 src=github
+amxv/mcp-manager  # stars=295 lang=TypeScript pushed=2026-10-24 src=github
+explorium-ai/vibeprospecting-mcp  # stars=294 lang=JavaScript pushed=2026-09-15 src=github
+HarimxChoi/google-surf-mcp  # stars=291 lang=TypeScript pushed=2026-10-30 src=github
+jinzcdev/markmap-mcp-server  # stars=290 lang=TypeScript pushed=2026-08-04 src=github
+gimp-mcp/gimp-mcp  # stars=285 lang=Python pushed=2026-11-01 src=github
+the-momentum/apple-health-mcp-server  # stars=284 lang=Python pushed=2026-07-09 src=github
+kiliczsh/mcp-mongo-server  # stars=284 lang=TypeScript pushed=2026-07-29 src=github
+RamsesAguirre777/facebook-ads-library-mcp  # stars=283 lang=Python pushed=2026-08-29 src=github
+c1pher-cn/ha-mcp-for-xiaozhi  # stars=281 lang=Python pushed=2026-10-17 src=github
+lotchuazzz-crypto/papergraph-mcp  # stars=279 lang=Python pushed=2026-10-18 src=github
+codespar/mcp-dev-latam  # stars=277 lang=TypeScript pushed=2026-09-27 src=github
+CrowdStrike/falcon-mcp  # stars=274 lang=Python pushed=2026-11-01 src=github
+SepineTam/mcp-for-stata  # stars=272 lang=Python pushed=2026-10-19 src=github
+w0h1v/mcp-maigret  # stars=269 lang=TypeScript pushed=2026-11-01 src=github
+hustcc/mcp-echarts  # stars=269 lang=TypeScript pushed=2026-08-27 src=github
+DMontgomery40/bambu-printer-mcp  # stars=269 lang=TypeScript pushed=2026-11-02 src=github

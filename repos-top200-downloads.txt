@@ -1,0 +1,201 @@
+# batch: top 200 by npm weekly downloads from repos.txt
+haydenbleasel/blume  # downloads=195285 npm=blume src=npm
+supabase/mcp  # downloads=189121 npm=@supabase/mcp-server-supabase src=npm
+ruvnet/agentdb  # downloads=187337 npm=agentdb src=npm
+microsoft/azure-devops-mcp  # downloads=171094 npm=@azure-devops/mcp src=npm
+microsoft/mcp  # downloads=165422 npm=@azure/mcp src=npm
+vouchington/vouchington-tooling  # downloads=165397 npm=vouchington-tooling src=npm
+mock-server/mockserver-monorepo  # downloads=162297 npm=mockserver-client src=npm
+jonathanong/agent-blackboard  # downloads=159123 npm=agent-blackboard src=npm
+firecrawl/firecrawl-mcp-server  # downloads=158613 npm=firecrawl-mcp src=npm
+vercel/next-devtools-mcp  # stars=835 downloads=155148 lang=TypeScript pushed=2026-09-15 npm=next-devtools-mcp src=github+npm
+GLips/Figma-Context-MCP  # downloads=150783 npm=figma-developer-mcp src=npm
+ruvnet/ruvector  # downloads=146949 npm=ruvector src=npm
+getsentry/XcodeBuildMCP  # downloads=133593 npm=xcodebuildmcp src=npm
+mongodb-js/mongodb-mcp-server  # stars=1155 downloads=130853 lang=TypeScript pushed=2026-11-02 npm=@mongodb-js/mcp-types src=github+npm
+SAP/open-ux-tools  # downloads=128143 npm=@sap-ux/fiori-mcp-server src=npm
+nrwl/nx-console  # downloads=120797 npm=nx-mcp src=npm
+ruvnet/agentic-flow  # downloads=118831 npm=agentic-flow src=npm
+UI5/mcp-server  # stars=107 downloads=114245 lang=TypeScript pushed=2026-11-01 npm=@ui5/mcp-server src=github+npm
+clerk/cli  # downloads=106054 npm=clerk src=npm
+cline/cline  # downloads=103990 npm=cline src=npm
+supercorp-ai/supergateway  # downloads=102478 npm=supergateway src=npm
+ruvnet/claude-flow  # downloads=102194 npm=ruflo src=npm
+nitrocloudofficial/nitrostack  # stars=2569 downloads=98184 lang=TypeScript pushed=2026-10-19 npm=@nitrostack/cli src=github+npm
+googleapis/gcloud-mcp  # downloads=95254 npm=@google-cloud/gcloud-mcp src=npm
+Softeria/ms-365-mcp-server  # downloads=91125 npm=@softeria/ms-365-mcp-server src=npm
+southleft/figma-console-mcp  # stars=2646 downloads=84104 lang=TypeScript pushed=2026-10-29 npm=figma-console-mcp src=github+npm
+ruvnet/metaharness  # stars=737 downloads=82561 lang=TypeScript pushed=2026-11-02 npm=metaharness src=github+npm
+cap-js/mcp-server  # stars=118 downloads=78234 lang=JavaScript pushed=2026-11-02 npm=@cap-js/mcp-server src=github+npm
+GoogleChromeLabs/use-webmcp-tool  # downloads=77619 npm=use-webmcp-tool src=npm
+armitage-labs/creem  # downloads=75760 npm=creem src=npm
+MCPJam/inspector  # stars=2298 downloads=74370 lang=TypeScript pushed=2026-11-03 npm=@mcpjam/sdk src=github+npm
+currents-dev/currents-mcp  # stars=21 downloads=72541 lang=TypeScript pushed=2026-10-30 npm=@currents/mcp src=github+npm
+agnostai/agnostai  # downloads=71384 npm=agnost src=npm
+chrisryugj/kordoc  # stars=2891 downloads=71038 lang=TypeScript pushed=2026-11-03 npm=kordoc src=github+npm
+containers/kubernetes-mcp-server  # downloads=66250 npm=kubernetes-mcp-server src=npm
+mastra-ai/mastra  # downloads=65369 npm=@mastra/mcp-docs-server src=npm
+netlify/netlify-mcp  # downloads=62338 npm=@netlify/mcp src=npm
+QuantGeekDev/mcp-framework  # downloads=61830 npm=mcp-framework src=npm
+exa-labs/exa-mcp-server  # downloads=59880 npm=exa-mcp-server src=npm
+czlonkowski/n8n-mcp  # downloads=59436 npm=n8n-mcp src=npm
+BrowserMCP/mcp  # downloads=58416 npm=@browsermcp/mcp src=npm
+letoribo/mcp-graphql-enhanced  # downloads=57579 npm=@letoribo/mcp-graphql-enhanced src=npm
+abhigyanpatwari/GitNexus  # downloads=57246 npm=gitnexus src=npm
+eslint/rewrite  # downloads=57097 npm=@eslint/mcp src=npm
+JKHeadley/instar  # stars=86 downloads=56117 lang=TypeScript pushed=2026-11-03 npm=instar src=github+npm
+zencoderai/slack-mcp-server  # downloads=55827 npm=@zencoderai/slack-mcp-server src=npm
+microsoft/postgres-mcp  # downloads=55192 npm=@microsoft/postgres-mcp src=npm
+fiberplane/mcp-lite  # downloads=54299 npm=mcp-lite src=npm
+mclenhard/mcp-evals  # downloads=54155 npm=mcp-evals src=npm
+mcp-use/mcp-use  # downloads=51902 npm=mcp-use src=npm
+polotno-project/polotno  # downloads=51530 npm=polotno src=npm
+korotovsky/slack-mcp-server  # downloads=50108 npm=slack-mcp-server src=npm
+brave/brave-search-mcp-server  # downloads=48595 npm=@brave/brave-search-mcp-server src=npm
+lobehub/mcp-hello-world  # downloads=44892 npm=mcp-hello-world src=npm
+winor30/mcp-server-datadog  # downloads=43927 npm=@winor30/mcp-server-datadog src=npm
+ericthered926/duckduckgo-mcp-server  # downloads=41881 npm=@ericthered926/duckduckgo-mcp-server src=npm
+Serdnaley/metabase-mcp  # downloads=40279 npm=@serdnaley/metabase-mcp src=npm
+MetaMask/device-mcp  # downloads=39258 npm=@metamask/device-mcp src=npm
+upstash/context7  # downloads=38932 npm=ctx7 src=npm
+Unleash/unleash-mcp  # downloads=38587 npm=@unleash/mcp src=npm
+mksglu/context-mode  # downloads=37976 npm=context-mode src=npm
+bytebase/dbhub  # downloads=34800 npm=@bytebase/dbhub src=npm
+thedotmack/claude-mem  # downloads=34034 npm=claude-mem src=npm
+corsairdev/corsair  # downloads=33254 npm=corsair src=npm
+Cotal-AI/Cotal  # stars=380 downloads=33098 lang=TypeScript pushed=2026-11-03 npm=cotal-ai src=github+npm
+browserstack/mcp-server  # stars=155 downloads=32990 lang=TypeScript pushed=2026-11-02 npm=@browserstack/mcp-server src=github+npm
+apify/apify-mcp-server  # downloads=32269 npm=@apify/actors-mcp-server src=npm
+christiansancheta/memory-link  # downloads=30873 npm=configure src=npm
+jgraph/drawio-mcp  # downloads=30520 npm=@drawio/mcp src=npm
+synergyai-os/productbrain  # downloads=30380 npm=@productbrain/mcp src=npm
+replicate/replicate-typescript-stainless  # downloads=30095 npm=replicate-mcp src=npm
+Flux159/mcp-server-kubernetes  # stars=1610 downloads=29625 lang=TypeScript pushed=2026-10-26 npm=mcp-server-kubernetes src=github+npm
+meshy-dev/meshy-mcp-server  # stars=89 downloads=28246 lang=TypeScript pushed=2026-11-02 npm=@meshy-ai/meshy-mcp-server src=github+npm
+endformdev/docs  # downloads=28199 npm=endform src=npm
+agent-sh/agnix  # downloads=28133 npm=agnix src=npm
+tidewave-ai/tidewave_js  # downloads=27895 npm=tidewave src=npm
+vercel-labs/callscript  # downloads=27129 npm=callscript src=npm
+argoproj-labs/mcp-for-argocd  # stars=602 downloads=26500 lang=TypeScript pushed=2026-10-16 npm=argocd-mcp src=github+npm
+AlaeddineMessadi/opencode-mcp  # stars=161 downloads=25638 lang=TypeScript pushed=2026-10-29 npm=opencode-mcp src=github+npm
+dequelabs/axe-mcp-server-public  # downloads=25445 npm=axe-mcp-server src=npm
+ChristopherVR/ooxml  # downloads=25439 npm=pptx-viewer-mcp src=npm
+c1overzz/dsh-bili-scroll  # downloads=25342 npm=dsh-bili-scroll src=npm
+tavily-ai/tavily-mcp  # downloads=24962 npm=tavily-mcp src=npm
+florentine-ai/mcp  # downloads=24936 npm=@florentine-ai/mcp src=npm
+nspady/google-calendar-mcp  # downloads=24467 npm=@cocal/google-calendar-mcp src=npm
+nulab/backlog-mcp-server  # downloads=23682 npm=backlog-mcp-server src=npm
+basementstudio/xmcp  # stars=1348 downloads=23419 lang=TypeScript pushed=2026-10-28 npm=xmcp src=github+npm
+toggl/toggl-mcp  # downloads=23286 npm=@togglhq/mcp src=npm
+VoltAgent/voltagent  # downloads=22403 npm=@voltagent/mcp-server src=npm
+stripe/ai  # stars=2032 downloads=22313 lang=TypeScript pushed=2026-11-03 npm=@stripe/mcp src=github+npm
+AgentWorkforce/relayhistory  # downloads=22304 npm=ai-hist src=npm
+sujeet0414/Infy_mcp_playwright  # downloads=21789 npm=infy-mcp-playwright src=npm
+affaan-m/ECC  # downloads=21578 npm=ecc-universal src=npm
+benborla/mcp-server-mysql  # downloads=21284 npm=@benborla29/mcp-server-mysql src=npm
+blueprint-conformance/bce  # downloads=20970 npm=bce-engine src=npm
+zueai/vercel-api-mcp  # downloads=20394 npm=vercel-mcp src=npm
+ktnyt/cclsp  # downloads=20371 npm=cclsp src=npm
+pijusz/mcp-gsc  # downloads=20371 npm=mcp-gsc src=npm
+angelogiacco/elevenlabs-mcp  # downloads=20004 npm=@angelogiacco/elevenlabs-mcp-server src=npm
+alvbln/Alvin-Bot  # downloads=19985 npm=alvin-bot src=npm
+hlos-ai/mcp-servers  # downloads=19900 npm=mcp-server-whisper src=npm
+choesumin/sharp-mcp  # downloads=19867 npm=sharp-mcp src=npm
+rohitg00/agentmemory  # downloads=19327 npm=@agentmemory/mcp src=npm
+microsoft/clarity-mcp-server  # downloads=19158 npm=@microsoft/clarity-mcp-server src=npm
+contentful/contentful-mcp-server  # stars=61 downloads=18710 lang=TypeScript pushed=2026-11-03 npm=@contentful/mcp-server src=github+npm
+mui/mui-x  # downloads=18545 npm=@mui/mcp src=npm
+anysource-AI/malicious-mcp-server  # downloads=18439 npm=malicious-mcp-server src=npm
+appium/appium-mcp  # stars=513 downloads=18092 lang=TypeScript pushed=2026-11-02 npm=appium-mcp src=github+npm
+harsha-iiiv/openapi-mcp-generator  # downloads=18042 npm=openapi-mcp-generator src=npm
+haroldadmin/fastify-mcp  # stars=27 downloads=17877 lang=TypeScript pushed=2026-05-12 npm=fastify-mcp src=github+npm
+griffinwork40/agent-afk  # stars=63 downloads=17776 lang=TypeScript pushed=2026-11-03 npm=agent-afk src=github+npm
+agentfront/mcp-from-openapi  # downloads=17753 npm=mcp-from-openapi src=npm
+ihor-sokoliuk/mcp-searxng  # stars=1344 downloads=17616 lang=TypeScript pushed=2026-11-02 npm=mcp-searxng src=github+npm
+poe-platform/poe-code  # downloads=17487 npm=tiny-stdio-mcp-server src=npm
+affaan-m/agentshield  # stars=1358 downloads=17376 lang=TypeScript pushed=2026-10-18 npm=ecc-agentshield src=github+npm
+gongrzhe/server-gmail-autoauth-mcp  # downloads=17337 npm=@gongrzhe/server-gmail-autoauth-mcp src=npm
+postmanlabs/postman-mcp-server  # stars=325 downloads=16923 lang=TypeScript pushed=2026-10-30 npm=@postman/postman-mcp-server src=github+npm
+b1ff/atlassian-dc-mcp  # downloads=16802 npm=@atlassian-dc-mcp/jira src=npm
+tfohlmeister/convex-mcp-gateway  # downloads=16691 npm=convex-mcp-gateway src=npm
+auth0/auth0-mcp-server  # downloads=16636 npm=@auth0/auth0-mcp-server src=npm
+aventurevc/aventure-mcp  # downloads=16510 npm=@aventurevc/mcp-server src=npm
+foldkit/foldkit  # downloads=16295 npm=@foldkit/devtools-mcp src=npm
+ioBroker/mcp-package  # downloads=16275 npm=@iobroker/mcp-server src=npm
+decocms/studio  # stars=415 downloads=15840 lang=TypeScript pushed=2026-11-02 npm=decocms src=github+npm
+wevm/frog  # downloads=15371 npm=frog src=npm
+asklokesh/loki-mode  # downloads=15280 npm=loki-mode src=npm
+XeroAPI/xero-mcp-server  # downloads=14923 npm=@xeroapi/xero-mcp-server src=npm
+NikaBuligini/hono-mcp-server-sse-transport  # downloads=14887 npm=hono-mcp-server-sse-transport src=npm
+ubugeeei-prod/vize  # downloads=14848 npm=@vizejs/musea-mcp-server src=npm
+remorses/goke  # downloads=14829 npm=@goke/mcp src=npm
+agentistics/agentistics  # downloads=14753 npm=@agentistics/mcp src=npm
+artokun/comfyui-mcp  # stars=887 downloads=14742 lang=TypeScript pushed=2026-11-02 npm=comfyui-mcp src=github+npm
+kerlos/elysia-mcp  # stars=49 downloads=14719 lang=TypeScript pushed=2026-06-16 npm=elysia-mcp src=github+npm
+stevehuang0115/crewly  # downloads=14547 npm=crewly src=npm
+veryfront/veryfront-code  # stars=20 downloads=14327 lang=TypeScript pushed=2026-11-02 npm=veryfront src=github+npm
+freee/freee-mcp  # downloads=14303 npm=freee-mcp src=npm
+DeusData/codebase-memory-mcp  # downloads=14284 npm=codebase-memory-mcp src=npm
+IgniteUI/igniteui-theming  # downloads=14218 npm=igniteui-theming src=npm
+samuraikun/aws-s3-mcp  # downloads=13538 npm=aws-s3-mcp src=npm
+runpod/runpod-mcp  # downloads=13454 npm=@runpod/mcp-server src=npm
+joshuayoes/ios-simulator-mcp  # downloads=13443 npm=ios-simulator-mcp src=npm
+DayuanJiang/next-ai-draw-io  # downloads=13314 npm=@next-ai-drawio/mcp-server src=npm
+microsoft/work-iq  # downloads=12999 npm=@microsoft/workiq src=npm
+mycode699/clavue-v1  # downloads=12952 npm=clavue-v1 src=npm
+dataforseo/mcp-server-typescript  # stars=259 downloads=12911 lang=TypeScript pushed=2026-11-02 npm=dataforseo-mcp-server src=github+npm
+RajwardhanShinde/elk-mcp  # downloads=12764 npm=elasticsearch-mcp src=npm
+SAP/mdk-mcp-server  # stars=38 downloads=12746 lang=JavaScript pushed=2026-11-02 npm=@sap/mdk-mcp-server src=github+npm
+nabheet/google-services-mcp  # downloads=12580 npm=google-services-mcp src=npm
+iFurySt/open-computer-use  # downloads=12530 npm=open-computer-use src=npm
+qase-tms/qase-mcp-server  # downloads=12230 npm=@qase/mcp-server src=npm
+Goldziher/ai-rulez  # downloads=12119 npm=ai-rulez src=npm
+eyaltoledano/claude-task-master  # downloads=11948 npm=task-master-ai src=npm
+pdogra1299/bitbucket-mcp-server  # downloads=11835 npm=@nexus2520/bitbucket-mcp-server src=npm
+Aureliolo/gdharness  # stars=26 downloads=11798 lang=TypeScript pushed=2026-11-02 npm=gdharness src=github+npm
+nteract/semiotic  # downloads=11771 npm=semiotic src=npm
+webpro-nl/knip  # downloads=11656 npm=@knip/mcp src=npm
+hermoso-ai/hermoso  # downloads=11518 npm=hermoso src=npm
+anis-marrouchi/agentx  # downloads=11371 npm=agentix-cli src=npm
+marcusquinn/aidevops  # downloads=11246 npm=aidevops src=npm
+SmartBear/smartbear-mcp  # stars=44 downloads=11043 lang=TypeScript pushed=2026-11-02 npm=@smartbear/mcp src=github+npm
+cyanheads/obsidian-mcp-server  # stars=698 downloads=10987 lang=TypeScript pushed=2026-10-31 npm=obsidian-mcp-server src=github+npm
+jmagly/aiwg  # stars=228 downloads=10955 lang=TypeScript pushed=2026-11-03 npm=aiwg src=github+npm
+hypequery/hypequery  # stars=104 downloads=10955 lang=TypeScript pushed=2026-11-02 npm=@hypequery/mcp src=github+npm
+duhu2000/dsh-mcp-connector  # stars=100 downloads=10708 lang=JavaScript pushed=2026-11-02 npm=dsh-mcp-connector src=github+npm
+SocketDev/socket-mcp  # downloads=10669 npm=@socketsecurity/mcp src=npm
+primefaces/primeuix  # downloads=10640 npm=@primeuix/mcp src=npm
+Viqto0r/zames_pro  # downloads=10455 npm=zames_pro src=npm
+kunchenguid/chrome-devtools-axi  # downloads=10355 npm=chrome-devtools-axi src=npm
+sweetrb/apple-mail-mcp  # stars=106 downloads=10322 lang=JavaScript pushed=2026-11-02 npm=apple-mail-mcp src=github+npm
+programinglive/dev-workflow-mcp-server  # downloads=10320 npm=@programinglive/dev-workflow-mcp-server src=npm
+chrisryugj/korean-law-mcp  # stars=2829 downloads=10294 lang=TypeScript pushed=2026-11-01 npm=korean-law-mcp src=github+npm
+ironbee-ai/ironbee-devtools  # downloads=10278 npm=@ironbee-ai/devtools src=npm
+hasna/apps  # downloads=10267 npm=@hasna/todos src=npm
+nubo-db/dynoxide  # downloads=10223 npm=dynoxide src=npm
+phantom/phantom-connect-sdk  # downloads=10087 npm=@phantom/mcp-server src=npm
+harness/mcp-server  # stars=111 downloads=10054 lang=TypeScript pushed=2026-11-02 npm=harness-mcp-v2 src=github+npm
+t8y2/dbx  # downloads=9790 npm=@dbx-app/mcp-server src=npm
+tufantunc/ssh-mcp  # downloads=9638 npm=ssh-mcp src=npm
+antfu/nuxt-mcp-dev  # downloads=9628 npm=vite-plugin-mcp src=npm
+kshivam1177/android-mcp-framwork  # downloads=9417 npm=androidmcp-framework src=npm
+mantinedev/mantine  # downloads=9384 npm=@mantine/mcp-server src=npm
+Yu-tao-Li/dsh-computer-use-win  # stars=447 downloads=9347 lang=JavaScript pushed=2026-10-28 npm=dsh-computer-use-win src=github+npm
+dswbx/jsonv-ts  # downloads=9206 npm=jsonv-ts src=npm
+primefaces/primeng-nextchapter  # downloads=9103 npm=@primeng/mcp src=npm
+withruntime/runtime  # downloads=9089 npm=withruntime src=npm
+rajudandigam/agent-inspect  # stars=168 downloads=8881 lang=TypeScript pushed=2026-11-02 npm=agent-inspect src=github+npm
+xiajiajun516/dsh-config-manager  # stars=291 downloads=8794 lang=TypeScript pushed=2026-11-02 npm=dsh-config-manager src=github+npm
+ivo-toby/mcp-openapi-server  # downloads=8745 npm=@ivotoby/openapi-mcp-server src=npm
+useshortcut/mcp-server-shortcut  # downloads=8677 npm=@shortcut/mcp src=npm
+TinyCloudLabs/js-sdk  # downloads=8549 npm=@tinycloud/mcp src=npm
+kajisho5/ffmpeg-skill  # downloads=8527 npm=ffmpeg-skill src=npm
+jaminsmoke/codarch  # downloads=8505 npm=codarch src=npm
+growthbook/growthbook-mcp  # stars=24 downloads=8490 lang=TypeScript pushed=2026-10-27 npm=@growthbook/mcp src=github+npm
+portdeveloper/docusaurus-plugin-copy-page-button  # downloads=8417 npm=docusaurus-plugin-copy-page-button src=npm
+heroku/heroku-mcp-server  # downloads=8297 npm=@heroku/mcp-server src=npm
+vuluu2k/sbuilder-mcp  # downloads=8255 npm=sbuilder-mcp src=npm
+nikolai-vysotskyi/trace-mcp  # stars=201 downloads=8194 lang=TypeScript pushed=2026-11-02 npm=trace-mcp src=github+npm
+transcend-io/tools  # downloads=8180 npm=@transcend-io/mcp-server-consent src=npm
+thinkei/fe-mcp-service  # downloads=7963 npm=@ehrocks/fe-mcp-server src=npm
+Ashish-Bansal/playwright-mcp  # downloads=7920 npm=playwright-mcp src=npm
