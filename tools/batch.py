@@ -19,8 +19,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from hunt import ensure_semgrep, github_repo, prior_reports, short_rule, surface  # noqa: E402
-from scan import is_priority, parse_targets, slug_for  # noqa: E402
+from src.hunt import ensure_semgrep, github_repo, prior_reports, short_rule, surface  # noqa: E402
+from src.scan import is_priority, parse_targets, slug_for  # noqa: E402
 
 MAX_ROWS = 30
 

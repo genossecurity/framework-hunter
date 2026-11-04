@@ -36,7 +36,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-from scan import Repo, is_priority, slug_for, tool_names, tool_sites, has_mcp_server, iter_sources, TEST_PATH_RE  # noqa: E402
+from src.scan import Repo, is_priority, slug_for, tool_names, tool_sites, has_mcp_server, iter_sources, TEST_PATH_RE  # noqa: E402
 
 TRANSPORT_RE = {
     "stdio": re.compile(r"StdioServerTransport|stdio_server\(|transport\s*=\s*['\"]stdio['\"]"),

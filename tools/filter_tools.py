@@ -14,7 +14,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from scan import TEST_PATH_RE, has_mcp_server, parse_targets, slug_for, tool_sites  # noqa: E402
+from src.scan import TEST_PATH_RE, has_mcp_server, parse_targets, slug_for, tool_sites  # noqa: E402
 
 STAGES = ["tools", "server, no tool sites", "server, unsupported language", "no MCP server", "not cloned"]
 # SDK names, or the protocol's method name for hand-written servers (mockserver's McpRequestProcessor)
