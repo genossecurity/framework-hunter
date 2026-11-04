@@ -6,8 +6,8 @@
 
 The report (<work>/batches/batch-NN/report.md) has one section per repo: attack surface,
 scan health, priority queue with sinks, and prior public security reports. It is an input
-to manual triage, not a verdict. Record verdicts in findings/batch-NN/verdicts.md, next to
-any per-repo notes and PoCs.
+to manual triage, not a verdict. Record verdicts in research/findings/<experiment>/batch-NN/verdicts.md,
+next to any per-repo notes and PoCs.
 """
 import argparse
 import json
@@ -29,7 +29,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("batch", type=int, help="batch number, from 1")
     ap.add_argument("--size", type=int, default=10)
-    ap.add_argument("--list", default=str(ROOT / "targets" / "repos-top200-downloads-tools.txt"))
+    ap.add_argument("--list", default=str(ROOT / "research" / "targets" / "repos-top200-downloads-tools.txt"))
     ap.add_argument("--work", default=str(Path.home() / "mcp-hunt-work" / "scan"))
     ap.add_argument("--fresh", action="store_true", help="re-run Semgrep instead of reusing checkpoints")
     ap.add_argument("--no-github", action="store_true", help="skip the prior-reports lookup")
@@ -46,7 +46,7 @@ def main():
     out_dir.mkdir(parents=True, exist_ok=True)
     list_file = out_dir / "repos.txt"
     list_file.write_text("\n".join(chosen) + "\n")
-    cmd = [sys.executable, "-u", str(ROOT / "scan.py"), str(list_file), "--work", str(work), "--jobs", "8"]
+    cmd = [sys.executable, "-u", str(ROOT / "src" / "scan.py"), str(list_file), "--work", str(work), "--jobs", "8"]
     if not args.fresh:
         cmd.append("--resume")
     if subprocess.run(cmd).returncode != 0:

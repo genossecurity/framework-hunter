@@ -4,10 +4,10 @@ mcp-scan/
 *.log
 
 # PoC run artifacts (regenerated each run; mock/fake data only)
-findings/**/poc/.home/
-findings/**/poc/EXFIL-*.txt
-findings/**/poc/audited-activity.log
-findings/**/poc/CANARY_*
+research/findings/**/poc/.home/
+research/findings/**/poc/EXFIL-*.txt
+research/findings/**/poc/audited-activity.log
+research/findings/**/poc/CANARY_*
 
 # python / tooling
 .venv/

@@ -19,14 +19,14 @@ recall:
 	bash bench/recall.sh
 
 discover:
-	python3 discover.py -o repos.txt
+	python3 src/discover.py -o repos.txt
 
 scan:
-	python3 scan.py repos.txt
+	python3 src/scan.py repos.txt
 
 clean:
 	rm -rf .recall mcp-scan
 
 hunt:
 	@[ -n "$(DIR)" ] || { echo "usage: make hunt DIR=path-or-owner/repo"; exit 2; }
-	python3 hunt.py $(DIR)
+	python3 src/hunt.py $(DIR)

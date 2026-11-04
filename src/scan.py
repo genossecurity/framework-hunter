@@ -3,12 +3,12 @@
 triage dataset (findings.csv) plus a human summary (summary.md).
 
 Usage:
-  python3 scan.py repos.txt                 # taint + helper tiers (default)
-  python3 scan.py repos.txt --no-helper     # handler-taint tier only (fewest FPs)
-  python3 scan.py repos.txt --audit         # + noisy sink-only audit tier
-  python3 scan.py --local ./some-server     # scan a directory you already have
-  python3 scan.py repos.txt --work ./run1 --jobs 6
-  python3 scan.py repos.txt --resume        # reuse per-repo results from an interrupted run
+  python3 src/scan.py repos.txt                 # taint + helper tiers (default)
+  python3 src/scan.py repos.txt --no-helper     # handler-taint tier only (fewest FPs)
+  python3 src/scan.py repos.txt --audit         # + noisy sink-only audit tier
+  python3 src/scan.py --local ./some-server     # scan a directory you already have
+  python3 src/scan.py repos.txt --work ./run1 --jobs 6
+  python3 src/scan.py repos.txt --resume        # reuse per-repo results from an interrupted run
 
 repos.txt: one entry per line — owner/repo, a GitHub URL, or a local path.
 Lines starting with # are ignored; text after # is a comment.
@@ -39,10 +39,10 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
-HERE = Path(__file__).resolve().parent
-TAINT_RULES = HERE / "rules" / "mcp-taint.yaml"
-HELPER_RULES = HERE / "rules" / "mcp-helper.yaml"
-AUDIT_RULES = HERE / "rules-audit" / "mcp-sinks-audit.yaml"
+ROOT = Path(__file__).resolve().parent.parent
+TAINT_RULES = ROOT / "rules" / "mcp-taint.yaml"
+HELPER_RULES = ROOT / "rules" / "mcp-helper.yaml"
+AUDIT_RULES = ROOT / "rules-audit" / "mcp-sinks-audit.yaml"
 
 EXCLUDES = ["node_modules", "dist", "build", "out", ".next", "vendor", "venv", ".venv",
             "__pycache__", "coverage", "site-packages", ".smithery",

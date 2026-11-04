@@ -12,10 +12,10 @@ Sources:
           repos, with last-week download counts
 
 Usage:
-  python3 discover.py -o repos.txt                       # both sources, defaults
-  python3 discover.py --source npm --min-downloads 200 -o repos.txt
-  python3 discover.py --min-stars 50 --max-stars 2000 --pushed-days 120 --limit 300
-  python3 discover.py --exclude done.txt -o repos.txt    # skip repos already scanned
+  python3 src/discover.py -o repos.txt                       # both sources, defaults
+  python3 src/discover.py --source npm --min-downloads 200 -o repos.txt
+  python3 src/discover.py --min-stars 50 --max-stars 2000 --pushed-days 120 --limit 300
+  python3 src/discover.py --exclude done.txt -o repos.txt    # skip repos already scanned
 
 GitHub auth: set GITHUB_TOKEN, or be logged in with `gh` (its token is used).
 Unauthenticated search is limited to 10 requests/minute.

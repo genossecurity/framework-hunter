@@ -13,13 +13,13 @@ take.
 ## Pipeline
 
 ```
-  discover.py / funnel            clone (atomic, checkpointed)
-  top-N by npm downloads   ──►     $MCP_HUNT_WORK/scan/src/<slug>
+  src/discover.py / funnel        clone (atomic, checkpointed)
+  top-N by npm downloads   ──►     <work>/src/<slug>
   that build an MCP server
           │
           ▼
   ┌───────────────────────────────────────────────────────────┐
-  │  scan.py  — per repo                                       │
+  │  src/scan.py  — per repo                                   │
   │                                                            │
   │   Semgrep taint (3 tiers)        run 2–3× and union        │
   │   ├ taint  : tool-handler params   (beats nondeterminism)  │
@@ -53,19 +53,28 @@ take.
 The scanner finds candidates; a human decides verdicts. Priority rank is a triage input, not a
 bug count.
 
-For a walkthrough of the whole pipeline, see [docs/pipeline.pdf](docs/pipeline.pdf).
+For a walkthrough of the whole pipeline, see [docs/pipeline.pdf](docs/pipeline.pdf). For how each
+step decides what to surface, see [research/METHODOLOGY.md](research/METHODOLOGY.md).
 
 ## Layout
 
 | path | holds |
 |---|---|
-| `scan.py`, `hunt.py`, `discover.py` | scanner, single-server front end, mid-tier target discovery |
+| `src/` | the Python entry points, described below |
 | `tools/` | rule generator, funnel filter, batch runner, PoC sandbox |
 | `rules/`, `rules-audit/`, `tests/` | generated Semgrep rules and their fixtures |
 | `bench/` | CVE recall benchmark |
-| `targets/` | target lists and `funnel.csv` |
-| `findings/` | per-batch verdicts, notes, disclosure packages |
+| `research/targets/` | experiment 1 lists and `funnel.csv`; experiment 2 `frameworks-*.txt` and `exp2_batch/` batch lists |
+| `research/METHODOLOGY.md` | decision gates at each pipeline step, and the write-up of experiment 2's PoCs |
+| `research/findings/exp1-mcp/` | experiment 1 `batch-NN/` verdicts and disclosure packages, plus `SUMMARY.md` |
+| `research/findings/exp2-frameworks/` | experiment 2 (agent frameworks) `batch-NN/` verdicts and `adhoc/` notes |
 | `docs/` | pipeline PDF, disclosure template |
+
+**`src/`**
+
+- `src/scan.py`: clones targets, runs the tiered Semgrep scan with reach walk and context demotion, and writes `findings.csv`, `repos.csv` and `summary.md`.
+- `src/hunt.py`: runs `scan.py` on one local directory or `owner/repo`, prints the priority queue and prior public reports, and saves `report.md`.
+- `src/discover.py`: builds `repos.txt`, a target list of mid-tier MCP servers from GitHub and npm search.
 
 ## Validation
 
@@ -80,18 +89,22 @@ Read **Known limits** before trusting a clean result.
 ## Setup
 
 ```
-pip install semgrep          # 1.x, runs offline
+pip install semgrep pyyaml   # semgrep 1.x runs offline; pyyaml is only for `make rules`
 ```
 
-Python 3.10+, git. `$MCP_HUNT_WORK` (default `~/mcp-hunt-work`) holds clones, checkpoints and
-PoC trees — kept out of the repo.
+Python 3.10+, git. Clones, checkpoints and scan output stay out of the repo by default:
+`src/hunt.py` writes under `$MCP_HUNT_WORK/hunt/<slug>` (default `~/mcp-hunt-work`),
+`tools/batch.py` under `~/mcp-hunt-work/scan`. `src/scan.py` on its own writes to `./mcp-scan`
+(gitignored); change it with `--work`.
 
 ## Use
+
+Run these from the repo root.
 
 **One server:**
 
 ```
-./hunt.py ./path/to/mcp-server      # or: ./hunt.py owner/repo
+python3 src/hunt.py ./path/to/mcp-server      # or: python3 src/hunt.py owner/repo
 ```
 
 Prints the priority queue with reach chains, what was demoted and why, scan health, and (for
@@ -100,14 +113,18 @@ GitHub repos) prior public advisories/PRs. Saves `report.md` under `$MCP_HUNT_WO
 **A batch / funnel:**
 
 ```
-make discover                                    # -> repos.txt (GitHub + npm, mid-tier)
+python3 src/discover.py -o repos.txt             # GitHub + npm, mid-tier
 python3 tools/filter_tools.py <list> \
-    --src "$MCP_HUNT_WORK/scan/src" -o targets.txt --csv funnel.csv   # keep only real MCP servers w/ tools
+    --src ~/mcp-hunt-work/scan/src -o targets.txt --csv funnel.csv   # keep only real MCP servers w/ tools
 tools/run_batches.sh 1 15                        # scan in resumable batches of 10
 ```
 
+Batches read `research/targets/repos-top200-downloads-tools.txt` unless you pass another list to
+`tools/batch.py --list`.
+
 Then open `summary.md` / `findings.csv`, work the priority queue top-down, and for each
-candidate run the **triage checklist** below. Record verdicts in `findings/batch-NN/verdicts.md`.
+candidate run the **triage checklist** below. Record verdicts in
+`research/findings/<experiment>/batch-NN/verdicts.md`.
 
 ## The three tiers
 
@@ -142,7 +159,7 @@ minus context-demoted rows. Demoted rows stay in `findings.csv` — verify befor
 - The scanner parses code; it never installs or runs it. PoCs go in bubblewrap/VM
   (`npm install` runs third-party scripts).
 - Coordinated disclosure: private report, ~90 days, publish after a fix. Keep this repo
-  **private** while `findings/` has unreported candidates.
+  **private** while `research/findings/` has unreported candidates.
 
 ## Outputs
 
@@ -151,8 +168,9 @@ minus context-demoted rows. Demoted rows stay in `findings.csv` — verify befor
   CWE, reach_hint, auto_notes, file:line, sink, permalink) plus triage columns you fill
   (`reachable`, `sanitized_or_contained`, `poc_confirmed`, `status`, `cve`, …).
 - `repos.csv` — per-repo commit, tool count, findings per tier, scan health.
-- `findings/` — per-batch verdicts and disclosure packages. See **`findings/SUMMARY.md`** for
-  the 141-server run and its results.
+- `research/findings/` — per-batch verdicts and disclosure packages. See
+  **[`research/findings/exp1-mcp/SUMMARY.md`](research/findings/exp1-mcp/SUMMARY.md)** for the
+  141-server run and its results.
 
 ## Methodology finding (Semgrep soundness gap)
 

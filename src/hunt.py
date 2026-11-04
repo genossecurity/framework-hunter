@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Hunt one MCP server: scan it, print the triage queue, save a report.
 
-  ./hunt.py ./path/to/server             # a directory you already have
-  ./hunt.py owner/repo                   # clone from GitHub first
-  ./hunt.py ./server --work ./out        # keep the outputs somewhere specific
-  ./hunt.py ./server --audit             # add the noisy sink-only tier
-  ./hunt.py ./server --no-github         # skip the prior-reports lookup
+  src/hunt.py ./path/to/server             # a directory you already have
+  src/hunt.py owner/repo                   # clone from GitHub first
+  src/hunt.py ./server --work ./out        # keep the outputs somewhere specific
+  src/hunt.py ./server --audit             # add the noisy sink-only tier
+  src/hunt.py ./server --no-github         # skip the prior-reports lookup
 
 What you get, on the terminal and in <work>/report.md:
   - what the server exposes: tool names, registration files, transports, SECURITY.md
@@ -35,7 +35,8 @@ from collections import Counter
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE))
+ROOT = HERE.parent
+sys.path.insert(0, str(ROOT))
 from src.scan import Repo, is_priority, slug_for, tool_names, tool_sites, has_mcp_server, iter_sources, TEST_PATH_RE  # noqa: E402
 
 TRANSPORT_RE = {
@@ -50,7 +51,7 @@ GITHUB_RE = re.compile(r"github\.com[:/]([\w.-]+)/([\w.-]+?)(?:\.git)?/?$")
 def ensure_semgrep() -> None:
     if shutil.which("semgrep"):
         return
-    for venv in (os.environ.get("MCP_HUNT_VENV"), HERE / ".venv", Path.home() / "mcp-hunt-work" / ".venv"):
+    for venv in (os.environ.get("MCP_HUNT_VENV"), ROOT / ".venv", Path.home() / "mcp-hunt-work" / ".venv"):
         if venv and (Path(venv) / "bin" / "semgrep").exists():
             os.environ["PATH"] = f"{Path(venv) / 'bin'}{os.pathsep}{os.environ['PATH']}"
             return
