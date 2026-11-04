@@ -1,4 +1,4 @@
-# filtered from repos-top200-downloads.txt: repos whose source builds an MCP server with tools
+# filtered from targets/repos-top200-downloads.txt: repos whose source builds an MCP server with tools
 haydenbleasel/blume  # downloads=195285 npm=blume src=npm  tool_sites=5
 supabase/mcp  # downloads=189121 npm=@supabase/mcp-server-supabase src=npm  tool_sites=48
 ruvnet/agentdb  # downloads=187337 npm=agentdb src=npm  tool_sites=4

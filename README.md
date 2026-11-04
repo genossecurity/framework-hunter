@@ -53,6 +53,20 @@ take.
 The scanner finds candidates; a human decides verdicts. Priority rank is a triage input, not a
 bug count.
 
+For a walkthrough of the whole pipeline, see [docs/pipeline.pdf](docs/pipeline.pdf).
+
+## Layout
+
+| path | holds |
+|---|---|
+| `scan.py`, `hunt.py`, `discover.py` | scanner, single-server front end, mid-tier target discovery |
+| `tools/` | rule generator, funnel filter, batch runner, PoC sandbox |
+| `rules/`, `rules-audit/`, `tests/` | generated Semgrep rules and their fixtures |
+| `bench/` | CVE recall benchmark |
+| `targets/` | target lists and `funnel.csv` |
+| `findings/` | per-batch verdicts, notes, disclosure packages |
+| `docs/` | pipeline PDF, disclosure template |
+
 ## Validation
 
 | check | result |

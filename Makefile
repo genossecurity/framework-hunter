@@ -1,12 +1,13 @@
 SEMGREP_OPTS = --metrics off --disable-version-check
 
-.PHONY: help rules test recall scan discover clean
+.PHONY: help rules test recall scan discover clean hunt
 help:
 	@echo "make rules     regenerate rules from tools/gen_rules.py"
 	@echo "make test      unit-test every rule against tests/ fixtures"
-	@echo "make recall    re-find 3 published MCP CVEs at their vulnerable versions"
+	@echo "make recall    re-find 4 published MCP CVEs at their vulnerable versions"
 	@echo "make discover  build repos.txt (GitHub + npm)"
 	@echo "make scan      scan repos.txt -> mcp-scan/{findings.csv,repos.csv,summary.md}"
+	@echo "make hunt      scan one server: make hunt DIR=path-or-owner/repo"
 
 rules:
 	python3 tools/gen_rules.py

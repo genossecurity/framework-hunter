@@ -4,8 +4,8 @@
 Reads clones already on disk (scan.py fetches them); order and comments are kept. Every
 target lands in exactly one stage, so the funnel's numbers add up and can go in a paper:
 
-    python3 tools/filter_tools.py repos-top200-downloads.txt \
-        --src mcp-scan/src -o repos-top200-downloads-tools.txt --csv funnel.csv
+    python3 tools/filter_tools.py targets/repos-top200-downloads.txt \
+        --src mcp-scan/src -o targets/repos-top200-downloads-tools.txt --csv targets/funnel.csv
 """
 import argparse
 import csv

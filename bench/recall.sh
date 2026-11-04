@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Recall benchmark: scan three MCP servers at versions with published CVEs and
+# Recall benchmark: scan four MCP servers at versions with published CVEs and
 # check each known sink lands in the priority queue. Run after changing rules
 # or the scanner:  make recall
 set -euo pipefail

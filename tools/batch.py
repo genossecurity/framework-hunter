@@ -29,7 +29,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("batch", type=int, help="batch number, from 1")
     ap.add_argument("--size", type=int, default=10)
-    ap.add_argument("--list", default=str(ROOT / "repos-top200-downloads-tools.txt"))
+    ap.add_argument("--list", default=str(ROOT / "targets" / "repos-top200-downloads-tools.txt"))
     ap.add_argument("--work", default=str(Path.home() / "mcp-hunt-work" / "scan"))
     ap.add_argument("--fresh", action="store_true", help="re-run Semgrep instead of reusing checkpoints")
     ap.add_argument("--no-github", action="store_true", help="skip the prior-reports lookup")

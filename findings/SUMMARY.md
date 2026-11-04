@@ -3,11 +3,11 @@
 Static taint analysis + manual triage of the most-downloaded MCP servers, for coordinated
 disclosure and a reproducible dataset. This file aggregates the run; per-repo verdicts are in
 `findings/batch-NN/verdicts.md`, raw data in `~/mcp-hunt-work/scan/{findings.csv,repos.csv}` and
-`funnel.csv`. **Nothing has been filed.**
+`targets/funnel.csv`. **Nothing has been filed.**
 
 ## Dataset
 
-**Target selection (funnel, `funnel.csv`).** Top 200 npm packages by weekly downloads whose
+**Target selection (funnel, `targets/funnel.csv`).** Top 200 npm packages by weekly downloads whose
 repo was reachable, filtered to those that actually build an MCP server exposing tools:
 
 | stage | count |
