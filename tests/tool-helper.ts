@@ -1,4 +1,4 @@
-// Fixtures for rules/mcp-helper.yaml (JS/TS helper tier).
+// Fixtures for rules/tool-helper.yaml (JS/TS helper tier).
 // A 'ruleid' annotation means the next line MUST be flagged by that rule;
 // an 'ok' annotation means it must NOT be flagged.
 // Shapes mirror real MCP CVEs: handler dispatches into a helper/method that
@@ -12,42 +12,42 @@ const execAsync = promisify(exec);
 // kubectl-style helper in its own module (handler calls kubectlDescribe(input))
 export async function kubectlDescribe(k8s: unknown, input: { resourceType: string; name: string }) {
   const command = `kubectl describe ${input.resourceType} ${input.name}`;
-  // ruleid: mcp-js-command-injection-helper
+  // ruleid: tool-js-command-injection-helper
   return execSync(command, { encoding: "utf8" });
 }
 
 // class-method dispatch (handler calls this.describeGoPackage(request.params.arguments))
 class DocsServer {
   async describeGoPackage(args: { package: string; symbol?: string }) {
-    // ruleid: mcp-js-command-injection-helper
+    // ruleid: tool-js-command-injection-helper
     const { stdout } = await execAsync(`go doc ${args.package}`);
     return stdout;
   }
 
   private async isInstalled({ command }: { command: string }) {
-    // ruleid: mcp-js-command-injection-helper
+    // ruleid: tool-js-command-injection-helper
     await exec(`which ${command}`);
   }
 
   async version() {
-    // ok: mcp-js-command-injection-helper
+    // ok: tool-js-command-injection-helper
     return execSync("go version");
   }
 
   readDoc(name: string) {
-    // ruleid: mcp-js-path-traversal-helper
+    // ruleid: tool-js-path-traversal-helper
     return fs.readFileSync("/srv/docs/" + name, "utf8");
   }
 }
 
 // arrow helper
 const cloneRepo = async (url: string) => {
-  // ruleid: mcp-js-argument-injection-helper
+  // ruleid: tool-js-argument-injection-helper
   execFile("git", ["clone", url]);
 };
 
 const download = async (u: string) => {
-  // ruleid: mcp-js-ssrf-helper
+  // ruleid: tool-js-ssrf-helper
   return fetch(u);
 };
 

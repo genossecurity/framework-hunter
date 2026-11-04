@@ -1,9 +1,8 @@
-# Security advisory (DRAFT — not sent)
+# Security advisory (submitted 2026-11-04)
 
 > Written for: the nexent maintainer (ModelEngine-Group / Huawei), for coordinated disclosure.
-> nexent has private vulnerability reporting enabled and a SECURITY.md — prefer the GitHub
-> private advisory, with the SECURITY.md email as backup. This is a scaffold for the reporter to
-> review and submit; **nothing has been sent or filed.** Fill the bracketed fields first.
+> **Status: submitted to the maintainer on 2026-11-04; CVE pending, not guaranteed.** This is the
+> local working copy, so the submitted text may differ. Under embargo until the fix or 2027-02-02.
 
 **Title:** Workspace-confinement bypass via unbounded `startswith` prefix match in the built-in
 file tools (`_validate_path`) — read/write/delete/move outside the declared workspace
@@ -21,7 +20,7 @@ classic *missing-trailing-separator prefix match*.
 **Severity:** Medium — CVSS 3.1 **5.0** `AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:L` (see `cvss.md`;
 rises toward ~7 High if sensitive data sits in a prefix-sibling directory, which the default
 deployment layout makes true — see Impact).
-**Reporter:** [your name / handle], [contact] · **Disclosure policy:** 90-day coordinated.
+**Reporter:** genossecurity · **Disclosure policy:** 90-day coordinated.
 
 ---
 
@@ -123,12 +122,12 @@ to the shared `_validate_path` so all seven tools are fixed at once; resolve sym
 `SandboxWorkspace.resolve_file` already does this correctly — the non-mapped branch should match
 it.)
 
-## Disclosure timeline (template)
-- [YYYY-MM-DD] Reported privately via GitHub Security → "Report a vulnerability" (private
-  reporting is enabled), or `zhenggaoqi@huawei.com` per `SECURITY.md`.
+## Disclosure timeline
+- 2026-11-03: Bug validated.
+- 2026-11-04: Submitted to the maintainer.
 - [YYYY-MM-DD] Maintainer acknowledged (SECURITY.md commits to 48h).
 - [YYYY-MM-DD] Fix released in [version].
-- [report date + 90d] Public disclosure (or earlier by mutual agreement).
+- 2027-02-02 (report date + 90d): Public disclosure, or earlier by mutual agreement.
 
 ## References
 - `../verdicts.md` — batch-4 analysis, dedup, and bounded-impact honesty notes.

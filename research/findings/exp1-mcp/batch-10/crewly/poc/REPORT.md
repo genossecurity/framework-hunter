@@ -23,10 +23,10 @@ Deterministic; one command each. Requires only `node` and `bubblewrap` (`bwrap`)
 
 ```
 # realistic scenario (recommended)
-tools/sandbox.sh findings/batch-10/crewly/poc sh -c 'sh /work/scenario.sh'
+tools/sandbox.sh research/findings/exp1-mcp/batch-10/crewly/poc sh -c 'sh /work/scenario.sh'
 
 # minimal confirmation
-tools/sandbox.sh findings/batch-10/crewly/poc sh -c 'PATH=/work/bin:$PATH sh /work/run.sh'
+tools/sandbox.sh research/findings/exp1-mcp/batch-10/crewly/poc sh -c 'PATH=/work/bin:$PATH sh /work/run.sh'
 ```
 
 `tools/sandbox.sh` runs under bubblewrap with **`--unshare-net` (no network)**, an empty tmpfs
@@ -98,5 +98,5 @@ the complete payload. The failure of one sink does not stop the other.
 - `poc.mjs` / `run.sh` — minimal single-payload confirmation + benign control.
 - `poc.pdf` — standalone reproduction guide (this report in PDF form).
 
-Benign payloads only; mock/fake secrets; local clone only; no deployed instance touched;
-nothing filed.
+Benign payloads only; mock/fake secrets; local clone only; no deployed instance touched.
+Published 2026-11-04 as GHSA-v7q6-5mpg-q47w; CVE pending.

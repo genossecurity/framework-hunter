@@ -1,4 +1,4 @@
-# mcp-hunt — Methodology & decision gates
+# framework-hunter — Methodology & decision gates
 
 *Written for: engineers/reviewers new to this repo (and as the write-up behind the paper). It
 explains how the scanner decides what to surface at each step, and — for the agent-framework run
@@ -13,7 +13,9 @@ against the **finding criterion** (§7).
 
 ## Part 0 — The whole pipeline as pseudocode
 
-Every `GATE`/`DECISION` below is the actual logic in `scan.py` / `tools/gen_rules.py` / `hunt.py`.
+Every `GATE`/`DECISION` below is the actual logic in `src/scan.py` / `tools/gen_rules.py` /
+`src/hunt.py`, with two exceptions applied by hand: target curation for exp 2 (gate 1) and the
+scale check (gate 2).
 
 ```text
 hunt(population):                                   # population = funnel (exp1) or curated list (exp2)
@@ -27,7 +29,7 @@ hunt(population):                                   # population = funnel (exp1)
 
         repo = clone_shallow(target)               # --depth 1, atomic (*.partial→rename), 5-min cap
         # ---- GATE 2: scale ----
-        if src_file_count(repo) ~>= 20_000:  skip_or_scope(repo)   # un-scannable monorepo
+        if src_file_count(repo) ~>= 20_000:  skip_or_scope(repo)   # manual call, not in code
 
         rows = scan(repo)
         for r in rows:
@@ -143,8 +145,8 @@ time, we skip it or look only at its relevant parts, so that it doesn't hold up 
 Shallow (`git clone --depth 1 --no-tags`), atomic (clone to `*.partial`, rename on success so an
 interrupted clone never looks finished), 5-min timeout, `GIT_TERMINAL_PROMPT=0` (never hang on auth).
 
-**Scale gate (a monorepo guard, added in exp 2):** before scanning, measure source-file count. A
-repo in the ~20k-file range (e.g. `BuilderIO/agent-native`) is an un-scannable product monorepo;
+**Scale gate (a monorepo guard, added in exp 2):** this is a manual decision; no code checks file
+count. Before scanning, measure source-file count. A repo in the ~20k-file range (e.g. `BuilderIO/agent-native`) is an un-scannable product monorepo;
 it is **skipped** (or scoped to its framework packages) rather than stalling a batch. `mastra`
 (~8k effective) was deferred and run alone.
 
@@ -325,7 +327,7 @@ attackers can't use our findings in the meantime.
 
 CVSS 3.1 base vector + honest sensitivity notes (config gates, `UI:N` vs `UI:R`, scope). Disclosure
 is coordinated: private report, ~90 days, publish after a fix. **The repo stays private while
-`findings/` holds unreported candidates.**
+`research/findings/` holds unreported or embargoed candidates.**
 
 ---
 
@@ -333,7 +335,8 @@ is coordinated: private report, ~90 days, publish after a fix. **The repo stays 
 
 Experiment 2 scanned 99 of 100 frameworks (agent-native skipped; mastra run separately). **3
 confirmed net-new findings**, each with a sandboxed PoC, CVSS, and PDF under
-`findings/exp2-frameworks/batch-NN/`.
+`research/findings/exp2-frameworks/batch-NN/`. All 3 were validated on 2026-11-03 and submitted to
+their maintainers on 2026-11-04; each is a pending CVE, not an assigned one.
 
 ### PoC 1 — youtu-agent (TencentCloudADP/youtu-agent) — batch 3
 - **Hunting for:** CWE-94 code injection — an LLM-controllable value reaching `eval`/`exec`.

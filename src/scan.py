@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""mcp-hunt scanner: clone MCP server repos, run the taint rules, and build a
+"""framework-hunter scanner: clone target repos, run the taint rules, and build a
 triage dataset (findings.csv) plus a human summary (summary.md).
 
 Usage:
@@ -40,9 +40,9 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-TAINT_RULES = ROOT / "rules" / "mcp-taint.yaml"
-HELPER_RULES = ROOT / "rules" / "mcp-helper.yaml"
-AUDIT_RULES = ROOT / "rules-audit" / "mcp-sinks-audit.yaml"
+TAINT_RULES = ROOT / "rules" / "tool-taint.yaml"
+HELPER_RULES = ROOT / "rules" / "tool-helper.yaml"
+AUDIT_RULES = ROOT / "rules-audit" / "tool-sinks-audit.yaml"
 
 EXCLUDES = ["node_modules", "dist", "build", "out", ".next", "vendor", "venv", ".venv",
             "__pycache__", "coverage", "site-packages", ".smithery",
@@ -953,7 +953,7 @@ def write_summary(path: Path, rows: list[dict], repo_stats: list[dict], tiers: l
     prio = [r for r in rows if is_priority(r)]
     tools = sum(int(s.get("tools_exposed") or 0) for s in ok)
     sev_rank = {"ERROR": 0, "WARNING": 1, "INFO": 2}
-    L = [f"# mcp-hunt scan summary — {dt.datetime.now():%Y-%m-%d %H:%M}\n",
+    L = [f"# framework-hunter scan summary — {dt.datetime.now():%Y-%m-%d %H:%M}\n",
          f"- Targets: {len(repo_stats)} ({len(ok)} scanned, {no_source} with no JS/TS/Python files "
          f"scanned, {failed} failed)",
          f"- Tiers run: {', '.join(tiers)}",
@@ -1002,7 +1002,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("repos", nargs="?", help="file with one target per line")
     ap.add_argument("--local", nargs="+", default=[], help="local directories to scan")
-    ap.add_argument("--work", default="./mcp-scan", help="output/work dir (default ./mcp-scan)")
+    ap.add_argument("--work", default="./hunter-scan", help="output/work dir (default ./hunter-scan)")
     ap.add_argument("--no-helper", action="store_true",
                     help="skip the helper tier (function-param sources); fewer FPs, misses handler->helper bugs")
     ap.add_argument("--audit", action="store_true", help="also run the noisy sink-only audit tier")

@@ -1,8 +1,8 @@
-# Email draft — hive csv_sql file-read report (DRAFT, not sent)
+# Email draft — hive csv_sql file-read report
 
 > Written for: the hive maintainer, to send to contact@adenhq.com per hive's SECURITY.md.
-> This is a draft for the reporter to review; **nothing has been sent.** Fill the bracketed
-> fields and attach the PoC before sending. The structured write-up is in `advisory.md`.
+> **The report was submitted to the maintainer on 2026-11-04.** This is the local draft, so the
+> submitted text may differ. The structured write-up is in `advisory.md`.
 
 ---
 
@@ -75,5 +75,4 @@ avoid granting the `spreadsheet_advanced` tool category to agents that handle un
 Happy to clarify anything or verify a patch. Thanks for your work on hive.
 
 Best,
-[your name / handle]
-[contact]
+genossecurity

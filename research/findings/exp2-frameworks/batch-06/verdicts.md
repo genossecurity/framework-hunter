@@ -1,6 +1,7 @@
 # Experiment 2 — Agent frameworks, batch 6 (ranks 41–50 of frameworks-top100.txt)
 
-Same method/criterion. Scans local-only; **nothing filed**. Work dir `~/mcp-hunt-work/exp2`.
+Same method/criterion. Scans local-only. **hive submitted to the maintainer 2026-11-04 (CVE
+pending).** Work dir `~/mcp-hunt-work/exp2`.
 
 ## Result: 1 confirmed finding (hive csv_sql file-read bypass — but heavily-audited component,
 ## novelty uncertain). Rest by-design / already-confined / FP / not-tool-reachable.
@@ -22,8 +23,8 @@ Same method/criterion. Scans local-only; **nothing filed**. Work dir `~/mcp-hunt
 
 ## FINDING — aden-hive/hive: `csv_sql` arbitrary file read via DuckDB table functions
 
-**Status: PoC-confirmed (local, benign); dedup inconclusive on novelty — csv_sql is heavily
-audited; NOT filed.** PoC: `hive-csv-sql-poc/`.
+**Status: PoC-confirmed (local, benign); dedup inconclusive on novelty at review time — csv_sql is
+heavily audited; validated 2026-11-03; submitted to the maintainer 2026-11-04; CVE pending.** PoC: `hive-csv-sql-poc/`.
 
 **Location:** `tools/src/aden_tools/tools/csv_tool/csv_tool.py`, `csv_sql(path, query)`.
 

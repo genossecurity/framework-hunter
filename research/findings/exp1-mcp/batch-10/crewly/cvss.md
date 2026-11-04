@@ -2,12 +2,14 @@
 
 **Finding:** Read-only Auditor agent reaches arbitrary OS command execution via shell-
 metacharacter injection in the `create_github_issue` tool (`title`/`body`/`labels`).
-**Product:** crewly ≤ 1.20.470 (commit `537cf5208f38`). **CWE:** CWE-78 / CWE-77.
+**Product:** crewly ≤ 1.20.471 per the published advisory (reviewed at commit `537cf5208f38`).
+**CWE:** CWE-78 / CWE-77.
+**Status:** published 2026-11-04 as GHSA-v7q6-5mpg-q47w (reporter: genossecurity); CVE pending; patched in 1.20.472.
 
 ## Primary score — CVSS 3.1
 
 **Vector:** `CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H`
-**Base score: 8.7 — High**
+**Base score: 8.8 — High**
 
 | Metric | Value | Justification |
 |---|---|---|
@@ -26,12 +28,12 @@ reachability metrics for the attacker's input:
 
 | Assumption | Vector change | Base score |
 |---|---|---|
-| Primary (local agent input, low-priv foothold) | `AV:L/PR:L` | **8.7 High** |
+| Primary (local agent input, low-priv foothold) | `AV:L/PR:L` | **8.8 High** |
 | Untrusted audited input needs no privilege | `AV:L/PR:N` | 9.3 Critical |
 | Audited content arrives over the network | `AV:N/PR:L` | 9.9 Critical |
-| Remote + unauthenticated | `AV:N/PR:N` | 9.9 Critical |
+| Remote + unauthenticated | `AV:N/PR:N` | 10.0 Critical |
 
-Recommended headline: **High (8.7)**, with a note that it reaches **Critical (up to 9.9)** when
+Recommended headline: **High (8.8)**, with a note that it reaches **Critical (up to 10.0)** when
 the Auditor audits attacker-supplied or network-sourced content — the platform's intended use.
 
 **Default-policy caveat (keep in the report).** crewly's default policy gates nothing

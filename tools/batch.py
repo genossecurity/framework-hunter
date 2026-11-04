@@ -30,7 +30,7 @@ def main():
     ap.add_argument("batch", type=int, help="batch number, from 1")
     ap.add_argument("--size", type=int, default=10)
     ap.add_argument("--list", default=str(ROOT / "research" / "targets" / "repos-top200-downloads-tools.txt"))
-    ap.add_argument("--work", default=str(Path.home() / "mcp-hunt-work" / "scan"))
+    ap.add_argument("--work", default=str(Path.home() / "framework-hunter-work" / "scan"))
     ap.add_argument("--fresh", action="store_true", help="re-run Semgrep instead of reusing checkpoints")
     ap.add_argument("--no-github", action="store_true", help="skip the prior-reports lookup")
     args = ap.parse_args()

@@ -5,7 +5,7 @@ Reads clones already on disk (scan.py fetches them); order and comments are kept
 target lands in exactly one stage, so the funnel's numbers add up and can go in a paper:
 
     python3 tools/filter_tools.py research/targets/repos-top200-downloads.txt \
-        --src mcp-scan/src -o research/targets/repos-top200-downloads-tools.txt --csv research/targets/funnel.csv
+        --src hunter-scan/src -o research/targets/repos-top200-downloads-tools.txt --csv research/targets/funnel.csv
 """
 import argparse
 import csv
@@ -54,7 +54,7 @@ def other_language_server(root: Path) -> str:
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("repos")
-    ap.add_argument("--src", default="mcp-scan/src", help="directory holding the clones")
+    ap.add_argument("--src", default="hunter-scan/src", help="directory holding the clones")
     ap.add_argument("-o", "--output", required=True)
     ap.add_argument("--csv", help="also write one row per target: repo, stage, tool_sites, language")
     args = ap.parse_args()

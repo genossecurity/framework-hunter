@@ -1,15 +1,16 @@
-# Security report (DRAFT — not sent)
+# Security report (submitted 2026-11-04)
 
 > Written for: the hive maintainer (Aden). hive's SECURITY.md asks that vulnerabilities be
 > reported by email to **contact@adenhq.com** (not via public issues) and grants a safe-harbor
 > for good-faith research. It asks each report to contain four things — a description, steps to
-> reproduce, impact, and mitigations — so this report is structured to match. It is a scaffold
-> for the reporter to review and send; **nothing has been sent or filed.** Fill the bracketed
-> fields first.
+> reproduce, impact, and mitigations — so this report is structured to match.
+> **Status: validated 2026-11-03; submitted to the maintainer on 2026-11-04; CVE pending, not
+> guaranteed.** This is the local working copy, so the submitted text may differ. Under embargo
+> until the fix or 2027-02-02.
 
 **To:** contact@adenhq.com
 **Subject:** Arbitrary local file read in the `csv_sql` MCP tool (DuckDB table functions bypass the SELECT-only guard and the `~/.hive` sandbox)
-**Reporter:** [your name / handle], [contact] · **Disclosure policy:** 90-day coordinated
+**Reporter:** genossecurity · **Disclosure policy:** 90-day coordinated
 **Affected:** `hive` (aden-hive/hive), `aden_tools` package — `csv_sql` tool (and `excel_sql`,
 same root cause). Versions ≤ 1.0.14 (current; HEAD `4ede549`, 2026-11-02); the unguarded
 `:memory:` connection is present at least since v0.5.0 (sha `b0e2dac`). No fix as of this writing.

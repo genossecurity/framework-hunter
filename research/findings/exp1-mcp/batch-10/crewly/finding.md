@@ -1,8 +1,9 @@
 # stevehuang0115/crewly — read-only Auditor agent → RCE via shell injection in `create_github_issue`
 
-**Status: confirmed by local sandboxed PoC + independent source review; dedup done (no public
-report, unfixed on `main`); NOT filed. Candidate for coordinated disclosure — awaiting user
-decision.** Local clone only; no deployed instance touched; benign payload.
+**Status: confirmed by local sandboxed PoC + independent source review; published 2026-11-04 as
+[GHSA-v7q6-5mpg-q47w](https://github.com/stevehuang0115/crewly/security/advisories/GHSA-v7q6-5mpg-q47w),
+filed by the maintainer; CVE pending. Affects ≤ 1.20.471, patched in 1.20.472.** Local clone only;
+no deployed instance touched; benign payload.
 
 ## PoC (local, sandboxed, benign) — CONFIRMED
 See `poc/REPORT.md` for the full report (what it is, reproducibility, real-world impact).
@@ -107,7 +108,7 @@ therefore matters specifically for operators who **explicitly enabled** read-onl
 mode expecting it to contain the Auditor; it defeats a confinement a security-conscious
 operator turned on. It is not "confinement is on by default."
 
-## Prior-disclosure check (dedup) — none found; unfixed on `main`
+## Prior-disclosure check (dedup, as of 2026-11-02) — none found; unfixed on `main` at that time
 - GitHub **security advisories (GHSA): none** for `stevehuang0115/crewly`.
 - Issue/PR search (`command injection`, `execFile`, `create_github_issue`, `shell injection`,
   `auditor`/`gh issue`): no security report. `#178` is the *feature* issue that added auditor
@@ -127,20 +128,15 @@ operator turned on. It is not "confinement is on by default."
   the correct framing is the **Auditor** context: it has no bash and is contract-bound to
   read-only, so the injection is a real privilege escalation, not a redundant capability.
 
-## Next steps (pending user approval — nothing done yet)
-1. Build a **local, sandboxed** PoC against our own clone only: import the tool and call its
-   `execute({ title: "x$(touch /tmp/crewly-poc-canary)y", body: "b", labels:["bug"] })` under
-   `tools/sandbox.sh`, with `gh` stubbed or a benign canary, to demonstrate execution without
-   network or a real GitHub repo. Benign payload only.
-2. If confirmed, coordinated disclosure via crewly's GitHub **private security advisory**
-   (Security → Report a vulnerability), with the argv fix. 90-day window. Draft ready:
-   `advisory.md`; CVSS assessment: `cvss.md` / `cvss.pdf`.
-3. Add `crewly@1.20.470` + this commit to `bench/recall.sh` once disclosed.
+## Next steps
+1. Done: local, sandboxed PoC (`poc/`).
+2. Done: disclosed and published as GHSA-v7q6-5mpg-q47w, patched in 1.20.472.
+3. To do: add `crewly@1.20.470` + this commit to `bench/recall.sh`.
 
 ## Package contents (this folder)
 - `finding.md` — this root-cause writeup.
-- `advisory.md` — coordinated-disclosure advisory draft (not sent).
-- `cvss.md` / `cvss.pdf` — CVSS 3.1 assessment (8.7 High; up to 9.9 Critical).
+- `advisory.md` — local pre-submission copy of the advisory (published as GHSA-v7q6-5mpg-q47w).
+- `cvss.md` / `cvss.pdf` — CVSS 3.1 assessment (8.8 High; up to 10.0 Critical). `cvss.pdf` still shows the earlier 8.7 and 9.9.
 - `poc/` — local sandboxed reproduction. `REPORT.md` + `poc.pdf` (standalone guide with files
   embedded). Two PoCs: `scenario.sh` + `exfil-poc.mjs` (realistic end-to-end — a read-only
   Auditor exfiltrates mock secrets + an SSH key and writes a backdoor file via an issue title,

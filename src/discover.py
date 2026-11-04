@@ -36,7 +36,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-UA = "mcp-hunt-discover/1.0"
+UA = "framework-hunter-discover/1.0"
 # Heavily-audited projects: findings there are unlikely and contested.
 DEFAULT_SKIP = {
     "modelcontextprotocol/servers", "modelcontextprotocol/typescript-sdk",

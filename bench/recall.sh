@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Recall benchmark: scan four MCP servers at versions with published CVEs and
-# check each known sink lands in the priority queue. Run after changing rules
+# Recall benchmark: scan five MCP servers at versions with published CVEs or
+# advisories and check each known sink lands in the priority queue. Run after changing rules
 # or the scanner:  make recall
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
@@ -11,8 +11,9 @@ get https://github.com/sammcj/mcp-package-docs     pkgdocs cb4ad49615275379fd6f2
 get https://github.com/Flux159/mcp-server-kubernetes k8s    v2.4.9                                     # CVE-2025-53355
 get https://github.com/alexei-led/aws-mcp-server    awsmcp  2f42717^                                   # CVE-2025-5277
 get https://github.com/GLips/Figma-Context-MCP      figma   v0.6.2                                     # CVE-2025-53967
+get https://github.com/stevehuang0115/crewly        crewly  537cf5208f38                               # GHSA-v7q6-5mpg-q47w
 rm -f run/findings.csv
-python3 "$HERE/src/scan.py" --local "$W/pkgdocs" "$W/k8s" "$W/awsmcp" "$W/figma" --work "$W/run" | grep -E "priority"
+python3 "$HERE/src/scan.py" --local "$W/pkgdocs" "$W/k8s" "$W/awsmcp" "$W/figma" "$W/crewly" --work "$W/run" | grep -E "priority"
 cd "$HERE" && python3 - "$W/run/findings.csv" <<'PY'
 import csv, sys
 from src.scan import is_priority
@@ -23,6 +24,8 @@ checks = {
     "CVE-2025-54073 mcp-package-docs      ": lambda r: r["repo"].endswith("pkgdocs") and "command" in r["rule"],
     # exec(curl ... "${url}") in a generic helper, 2 hops below the get_figma_data tool
     "CVE-2025-53967 figma-developer-mcp   ": lambda r: r["file"].endswith("fetch-with-retry.ts") and "command" in r["rule"],
+    # execSync of a gh command string in the Auditor's create_github_issue tool
+    "GHSA-v7q6-5mpg-q47w crewly           ": lambda r: r["file"].endswith("auditor-tools.ts") and "command" in r["rule"],
 }
 fail = 0
 for name, f in checks.items():

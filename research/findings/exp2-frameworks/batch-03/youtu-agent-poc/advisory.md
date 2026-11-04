@@ -1,8 +1,8 @@
-# Security advisory (DRAFT — not sent)
+# Security advisory (submitted 2026-11-04)
 
-> Written for: the youtu-agent maintainer (Tencent Cloud ADP), for coordinated disclosure via a
-> GitHub private security advisory. This is a scaffold for the reporter to review and submit;
-> **nothing has been sent or filed.** Fill the bracketed fields before submitting.
+> Written for: the youtu-agent maintainer (Tencent Cloud ADP), for coordinated disclosure.
+> **Status: submitted to the maintainer on 2026-11-04; CVE pending, not guaranteed.** This is the
+> local working copy, so the submitted text may differ. Under embargo until the fix or 2027-02-02.
 
 **Title:** Remote code execution via `eval()` of model output in the ReAct response parser
 (`ReactConverter._parse_react_output`)
@@ -18,7 +18,7 @@ no security issue/PR. (PR #263 "three high-quality bug fixes" hardened *other* f
 **CWE:** CWE-94 (Code Injection); secondary CWE-95 (eval injection)
 **Severity:** High — CVSS 3.1 **8.8** `AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H` (see `cvss.md`;
 → 9.8 if the agent ingests attacker content autonomously, lower when the ReAct runner is unused).
-**Reporter:** [your name / handle], [contact] · **Disclosure policy:** 90-day coordinated.
+**Reporter:** genossecurity · **Disclosure policy:** 90-day coordinated.
 
 ---
 
@@ -103,13 +103,12 @@ except json.JSONDecodeError:
 `ast.literal_eval` handles the single-quoted-dict case that motivated the `eval` without
 evaluating code. (Even stricter: require strict JSON from the ReAct prompt and reject non-JSON.)
 
-## Disclosure timeline (template)
-- [YYYY-MM-DD] Reported privately (GitHub Security → "Report a vulnerability"; private reporting
-  is currently disabled — if it stays disabled, email the maintainer: `easonsshi@tencent.com`,
-  the `pyproject.toml` author, requesting a private channel).
+## Disclosure timeline
+- 2026-11-03: Bug validated.
+- 2026-11-04: Submitted to the maintainer.
 - [YYYY-MM-DD] Maintainer acknowledged.
 - [YYYY-MM-DD] Fix released in [version].
-- [report date + 90d] Public disclosure (or earlier by mutual agreement).
+- 2027-02-02 (report date + 90d): Public disclosure, or earlier by mutual agreement.
 
 ## References
 - `../verdicts.md` — batch-3 analysis and dedup.

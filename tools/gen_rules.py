@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate rules/mcp-taint.yaml.
+"""Generate rules/tool-taint.yaml.
 
 The MCP SDKs register tools in many syntactic shapes (typed / untyped,
 async / sync, server.tool / registerTool / addTool / low-level handler,
@@ -196,8 +196,8 @@ NOT_SHELL = [{"pattern-not": "$FN(..., {..., shell: true, ...})"},
              {"pattern-not": "$O.$FN(..., {..., shell: true, ...})"}]
 
 JS_RULES = [
-    dict(id="mcp-js-command-injection", severity="ERROR", cwe="CWE-78", impact="RCE",
-         message="MCP tool argument reaches a shell-command sink. Shell metacharacters "
+    dict(id="tool-js-command-injection", severity="ERROR", cwe="CWE-78", impact="RCE",
+         message="Tool argument reaches a shell-command sink. Shell metacharacters "
                  "(; | $() `) in the argument execute arbitrary commands on the server host. "
                  "Fix: execFile/spawn with an args array and no shell.",
          sinks=[
@@ -212,8 +212,8 @@ JS_RULES = [
                    "$CP.spawn($C, ..., {..., shell: true, ...})",
                    "$CP.spawnSync($C, ..., {..., shell: true, ...})"], "$C"),
          ]),
-    dict(id="mcp-js-argument-injection", severity="WARNING", cwe="CWE-88", impact="RCE/file-write (tool-dependent)",
-         message="MCP tool argument flows into the argv of a spawned program (no shell). "
+    dict(id="tool-js-argument-injection", severity="WARNING", cwe="CWE-88", impact="RCE/file-write (tool-dependent)",
+         message="Tool argument flows into the argv of a spawned program (no shell). "
                  "If the program is attacker-chosen this is RCE; otherwise check for option "
                  "injection (e.g. git --upload-pack=, ssh -oProxyCommand=, curl -o, tar --checkpoint-action). "
                  "Fix: allowlist the binary, insert '--' before user args, reject leading '-'.",
@@ -225,8 +225,8 @@ JS_RULES = [
                    "spawnSync($B, $C, ...)", "$CP.execFile($B, $C, ...)", "$CP.spawn($B, $C, ...)",
                    "$CP.spawnSync($B, $C, ...)", "execa($B, $C, ...)", "execaSync($B, $C, ...)"], "$C", NOT_SHELL),
          ]),
-    dict(id="mcp-js-path-traversal", severity="WARNING", cwe="CWE-22", impact="arbitrary file read/write",
-         message="MCP tool argument is used as a filesystem path. Without resolving it and "
+    dict(id="tool-js-path-traversal", severity="WARNING", cwe="CWE-22", impact="arbitrary file read/write",
+         message="Tool argument is used as a filesystem path. Without resolving it and "
                  "checking it stays under an allowed base directory, '../' or an absolute path "
                  "reads/writes arbitrary files. Note: a path.resolve()+startsWith() containment "
                  "check is NOT modeled here — verify by hand before reporting.",
@@ -240,8 +240,8 @@ JS_RULES = [
                    "unlink($P, ...)", "rm($P, ...)", "readFileSync($P, ...)", "writeFileSync($P, ...)"], "$P"),
          ],
          sanitizers=["path.basename(...)", "basename(...)"]),
-    dict(id="mcp-js-ssrf", severity="WARNING", cwe="CWE-918", impact="SSRF",
-         message="MCP tool argument controls the URL of an outbound request. With no host "
+    dict(id="tool-js-ssrf", severity="WARNING", cwe="CWE-918", impact="SSRF",
+         message="Tool argument controls the URL of an outbound request. With no host "
                  "allowlist and no block on loopback/link-local/metadata ranges, the tool can "
                  "reach internal services or cloud metadata (169.254.169.254). Test only against "
                  "a canary listener you own.",
@@ -251,8 +251,8 @@ JS_RULES = [
                    "http.request($U, ...)", "https.request($U, ...)", "undici.request($U, ...)",
                    "$PAGE.goto($U, ...)", "ky($U, ...)", "ky.$M($U, ...)", "superagent.$M($U, ...)"], "$U"),
          ]),
-    dict(id="mcp-js-code-injection", severity="ERROR", cwe="CWE-94", impact="RCE",
-         message="MCP tool argument is evaluated as code. This is direct code execution in the "
+    dict(id="tool-js-code-injection", severity="ERROR", cwe="CWE-94", impact="RCE",
+         message="Tool argument is evaluated as code. This is direct code execution in the "
                  "server process. If this is an intentional 'run code' tool, check whether it "
                  "claims to be sandboxed — vm/vm2 are not security boundaries.",
          sinks=[
@@ -264,8 +264,8 @@ JS_RULES = [
                  {"metavariable-regex": {"metavariable": "$VM",
                                          "regex": r"^(vm|vm2|VM|nodeVm|nodeVM|sandbox|sandboxVm|isolate|jail|safeVm|ses)$"}}]),
          ]),
-    dict(id="mcp-js-sql-injection", severity="WARNING", cwe="CWE-89", impact="SQL injection",
-         message="MCP tool argument reaches a SQL query string. If it is concatenated/templated "
+    dict(id="tool-js-sql-injection", severity="WARNING", cwe="CWE-89", impact="SQL injection",
+         message="Tool argument reaches a SQL query string. If it is concatenated/templated "
                  "into the query, that is SQL injection; use parameters. If the tool is meant to "
                  "run arbitrary SQL, check for a claimed read-only mode that can be bypassed "
                  "(stacked queries, ATTACH, COPY ... PROGRAM, writable CTEs).",
@@ -288,8 +288,8 @@ JS_RULES = [
 ]
 
 PY_RULES = [
-    dict(id="mcp-py-command-injection", severity="ERROR", cwe="CWE-78", impact="RCE",
-         message="MCP tool argument reaches a shell-command sink. Shell metacharacters in the "
+    dict(id="tool-py-command-injection", severity="ERROR", cwe="CWE-78", impact="RCE",
+         message="Tool argument reaches a shell-command sink. Shell metacharacters in the "
                  "argument execute arbitrary commands on the server host. Fix: pass an args "
                  "list without shell=True.",
          sinks=[
@@ -298,8 +298,8 @@ PY_RULES = [
                    "asyncio.create_subprocess_shell($C, ...)", "commands.getoutput($C)"], "$C"),
          ],
          sanitizers=["shlex.quote(...)", "pipes.quote(...)"]),
-    dict(id="mcp-py-argument-injection", severity="WARNING", cwe="CWE-88", impact="RCE/file-write (tool-dependent)",
-         message="MCP tool argument flows into the argv of a spawned program (no shell). If the "
+    dict(id="tool-py-argument-injection", severity="WARNING", cwe="CWE-88", impact="RCE/file-write (tool-dependent)",
+         message="Tool argument flows into the argv of a spawned program (no shell). If the "
                  "program is attacker-chosen this is RCE; otherwise check for option injection "
                  "(git --upload-pack=, ssh -oProxyCommand=, curl -o, tar --checkpoint-action). "
                  "Fix: allowlist the binary, insert '--' before user args, reject leading '-'.",
@@ -313,8 +313,8 @@ PY_RULES = [
              sink(["asyncio.create_subprocess_exec(..., $C, ...)", "os.execv($C, ...)",
                    "os.execvp($C, ...)", "os.spawnv($M, $C, ...)"], "$C"),
          ]),
-    dict(id="mcp-py-path-traversal", severity="WARNING", cwe="CWE-22", impact="arbitrary file read/write",
-         message="MCP tool argument is used as a filesystem path. Without resolving it "
+    dict(id="tool-py-path-traversal", severity="WARNING", cwe="CWE-22", impact="arbitrary file read/write",
+         message="Tool argument is used as a filesystem path. Without resolving it "
                  "(os.path.realpath / Path.resolve) and checking it stays under an allowed base "
                  "directory, '../' or an absolute path reads/writes arbitrary files. Containment "
                  "checks are NOT modeled here — verify by hand before reporting.",
@@ -326,8 +326,8 @@ PY_RULES = [
                    "shutil.move($P, ...)", "send_file($P, ...)", "FileResponse($P, ...)"], "$P"),
          ],
          sanitizers=["os.path.basename(...)", "secure_filename(...)"]),
-    dict(id="mcp-py-ssrf", severity="WARNING", cwe="CWE-918", impact="SSRF",
-         message="MCP tool argument controls the URL of an outbound request. With no host "
+    dict(id="tool-py-ssrf", severity="WARNING", cwe="CWE-918", impact="SSRF",
+         message="Tool argument controls the URL of an outbound request. With no host "
                  "allowlist and no block on loopback/link-local/metadata ranges, the tool can "
                  "reach internal services or cloud metadata. Test only against a canary you own.",
          sinks=[
@@ -345,8 +345,8 @@ PY_RULES = [
                                          "regex": "^(get|post|put|delete|patch|head|request|stream)$"}},
                  {"focus-metavariable": "$U"}]},
          ]),
-    dict(id="mcp-py-code-injection", severity="ERROR", cwe="CWE-94", impact="RCE",
-         message="MCP tool argument is evaluated as code or deserialized unsafely "
+    dict(id="tool-py-code-injection", severity="ERROR", cwe="CWE-94", impact="RCE",
+         message="Tool argument is evaluated as code or deserialized unsafely "
                  "(eval/exec/pickle/marshal/unsafe yaml/torch.load without weights_only). This is "
                  "code execution in the server process.",
          sinks=[
@@ -365,8 +365,8 @@ PY_RULES = [
                  {"pattern-not": "torch.load($X, ..., weights_only=True, ...)"},
                  {"focus-metavariable": "$X"}]},
          ]),
-    dict(id="mcp-py-sql-injection", severity="WARNING", cwe="CWE-89", impact="SQL injection",
-         message="MCP tool argument reaches a SQL query string. If it is formatted/concatenated "
+    dict(id="tool-py-sql-injection", severity="WARNING", cwe="CWE-89", impact="SQL injection",
+         message="Tool argument reaches a SQL query string. If it is formatted/concatenated "
                  "into the query, that is SQL injection; use parameters. If the tool is meant to "
                  "run arbitrary SQL, check for a claimed read-only mode that can be bypassed.",
          sinks=[
@@ -385,7 +385,7 @@ def build(rule, languages, sources, tier="taint"):
         "severity": rule["severity"],
         "message": (rule["message"] if tier == "taint" else
                     "[helper tier] A function parameter reaches this sink. Confirm the function is "
-                    "called with MCP tool input (see reach_hint in findings.csv). " + rule["message"]),
+                    "called with tool input (see reach_hint in findings.csv). " + rule["message"]),
         "metadata": {
             "cwe": rule["cwe"],
             "impact": rule["impact"],
@@ -442,16 +442,16 @@ def main():
     gen = "# GENERATED by tools/gen_rules.py — edit the generator, not this file.\n"
 
     taint = [build(r, js, js_src) for r in JS_RULES] + [build(r, py, py_src) for r in PY_RULES]
-    dump(ROOT / "rules" / "mcp-taint.yaml", taint,
+    dump(ROOT / "rules" / "tool-taint.yaml", taint,
          gen + "# Taint rules: MCP tool-handler parameters (sources) -> dangerous sinks.\n")
 
     helper = ([build(r, js, js_helper_sources(), "helper") for r in JS_RULES]
               + [build(r, py, py_helper_sources(), "helper") for r in PY_RULES])
-    dump(ROOT / "rules" / "mcp-helper.yaml", helper,
+    dump(ROOT / "rules" / "tool-helper.yaml", helper,
          gen + "# Helper tier: any function parameter -> dangerous sink (covers handler->helper dispatch).\n")
 
     audit = [build_audit(r, js) for r in JS_RULES] + [build_audit(r, py) for r in PY_RULES]
-    dump(ROOT / "rules-audit" / "mcp-sinks-audit.yaml", audit,
+    dump(ROOT / "rules-audit" / "tool-sinks-audit.yaml", audit,
          gen + "# Audit tier (opt-in, noisy): sinks with any non-literal argument, no taint.\n")
 
 

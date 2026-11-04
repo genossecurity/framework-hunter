@@ -1,8 +1,8 @@
 # Batch 10 verdicts: funnel repos 91-100 of 141
 
 Raw scanner report: `~/mcp-hunt-work/scan/batches/batch-10/report.md`. Source review only.
-Nothing filed. No new, confirmed non-public bug. One low-confidence code-smell candidate
-(crewly) recorded for optional deeper review.
+One confirmed bug: crewly, published 2026-11-04 as GHSA-v7q6-5mpg-q47w, CVE pending (see the
+update below).
 
 | # | repo | verdict | depth of review |
 |---|---|---|---|
@@ -24,9 +24,10 @@ Nothing filed. No new, confirmed non-public bug. One low-confidence code-smell c
 > to the **Auditor** agent, which `auditor-tools.ts` documents as read-only "without any
 > ability to modify system state" and which has **no** bash tool. So the `create_github_issue`
 > shell injection is a genuine privilege escalation to RCE, **confirmed by a local sandboxed
-> PoC**. Full package: [`crewly/`](crewly/) — `finding.md`, `advisory.md` (draft, not sent),
-> `cvss.md`/`cvss.pdf` (3.1 = 8.7 High, up to 9.9 Critical), `poc/`. No public dedup. **Not
-> filed.** The original first-pass analysis is kept below for the record.
+> PoC**. Full package: [`crewly/`](crewly/) — `finding.md`, `advisory.md` (published as GHSA-v7q6-5mpg-q47w),
+> `cvss.md`/`cvss.pdf` (3.1 = 8.8 High, up to 10.0 Critical), `poc/`. No public report found at
+> review time. **Published 2026-11-04; CVE pending.** The original first-pass analysis is kept
+> below for the record.
 
 ### Original first-pass analysis (kept for the record)
 real escaping smell, but likely not a privilege-crossing vuln
@@ -57,7 +58,7 @@ Why it is **not** flagged as a reportable vulnerability here:
   needs an execution-context trace I did not complete at batch depth.
 - **Dedup:** no public issue/PR specifically reports this `create_github_issue` escaping.
 
-Verdict: recorded as a **low-confidence candidate** in `findings/README.md` — a genuine
+Verdict: recorded as a **low-confidence candidate** in `research/findings/exp1-mcp/README.md` — a genuine
 insufficient-escaping bug whose exploitability as a vuln depends on an unverified
 agent/owner execution-context question, in a project actively hardening that exact boundary.
 **Not filed.** Worth an argv-conversion fix regardless; worth a deeper trace only if we decide

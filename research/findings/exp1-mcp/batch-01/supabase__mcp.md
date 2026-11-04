@@ -52,7 +52,7 @@ OAuth grant or a broad PAT) and the caller knows B's `branch_id`.
 
 ## PoC (local, mocked API)
 
-`findings/batch-01/supabase__mcp-scope-poc.test.ts`, copied into
+`research/findings/exp1-mcp/batch-01/supabase__mcp-scope-poc.test.ts`, copied into
 `packages/mcp-server-supabase/src/` and run with `vitest` inside `tools/sandbox.sh`
 (network off, deps installed with `--ignore-scripts`). Result, 6/6 passing:
 

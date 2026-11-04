@@ -29,7 +29,7 @@ question is whether those guardrails can be bypassed — a CWE-863-style audit t
 dedicated PoC against the specific allow/deny logic, not a batch-triage glance. There are **no
 public security reports** to deduplicate against. I am **not** calling this clean, and **not**
 claiming a bug: it is the batch-6 candidate for deeper, end-to-end review if we choose to
-invest there. Recorded under Open candidates in `findings/README.md`.
+invest there. Recorded under Resolved in `research/findings/exp1-mcp/README.md`.
 
 **dbhub (52).** `execute_sql` running arbitrary SQL is the tool. The real concern — read-only
 mode being bypassable — is already three CVEs (CVE-2026-61789 MySQL/MariaDB write bypass,

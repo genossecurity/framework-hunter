@@ -1,7 +1,8 @@
 # Findings
 
 Each `batch-NN/` covers 10 repos of the tool-only funnel, in download order. `verdicts.md`
-has the verdict and how much was reviewed for each repo. Nothing here has been filed.
+has the verdict and how much was reviewed for each repo. One finding has been disclosed: crewly,
+published as [GHSA-v7q6-5mpg-q47w](https://github.com/stevehuang0115/crewly/security/advisories/GHSA-v7q6-5mpg-q47w).
 
 | batch | funnel repos | status |
 |---|---|---|
@@ -22,7 +23,7 @@ has the verdict and how much was reviewed for each repo. Nothing here has been f
 | [15](batch-15/verdicts.md) | 141 | assessed |
 
 **All 141 funnel repos assessed.** Outcome: **1 confirmed non-public finding** (crewly,
-below — packaged, not filed); 1 low-confidence code smell (SAP/mdk-mcp-server, batch 11,
+below — GHSA published, CVE pending); 1 low-confidence code smell (SAP/mdk-mcp-server, batch 11,
 not escalated). Every other repo was clean over MCP, already public (CVE/advisory/open fix PR),
 by-design local-path/exec/API behavior with no confinement claim to bypass, already-confined,
 or reach-walk/vendored/test noise. The recurring lesson: the top-downloaded MCP servers are
@@ -31,20 +32,22 @@ the one net-new bug was in a less-scrutinized server (crewly's read-only Auditor
 one. Scanner-tuning follow-ups (post-run excludes, SQL-tier `.get()` false positives,
 `prior_reports` parent-repo resolution) are noted across the batch verdicts.
 
-## Open candidates
+## Disclosed
 
-- **stevehuang0115/crewly** (batch 10) — **CONFIRMED (code-level), not filed, awaiting your
-  disclosure decision.** `create_github_issue` runs `execSync` on a `gh` command string
+- **stevehuang0115/crewly** (batch 10) — **Published 2026-11-04 as
+  [GHSA-v7q6-5mpg-q47w](https://github.com/stevehuang0115/crewly/security/advisories/GHSA-v7q6-5mpg-q47w),
+  filed by the maintainer; CVE pending. Affects ≤ 1.20.471, patched in 1.20.472.**
+  `create_github_issue` runs `execSync` on a `gh` command string
   escaping only `"`, so `$(...)`/backticks in the `title`/`body` tool args execute. The tool
   belongs to the **Auditor agent**, which `auditor-tools.ts` documents as read-only "without
   any ability to modify system state" and which has no bash tool — so this is a privilege
   escalation to **arbitrary RCE** that also bypasses the `validateBashCommand` denylist
   (curl/wget/rm) + approval gate. Reachable via indirect prompt injection (Auditor composes
-  titles from audited logs). HEAD `537cf52` / v1.20.470; no public dedup. **Confirmed by local
+  titles from audited logs). Reviewed at HEAD `537cf52` / v1.20.470. **Confirmed by local
   sandboxed PoC.** Disclosure package in [batch-10/crewly/](batch-10/crewly/):
-  [finding.md](batch-10/crewly/finding.md), [advisory.md](batch-10/crewly/advisory.md) (draft,
-  not sent), [cvss.pdf](batch-10/crewly/cvss.pdf) (3.1 = 8.7 High), and
-  [poc/](batch-10/crewly/poc/). Fix: `execFile('gh',[argv])`. Nothing filed.
+  [finding.md](batch-10/crewly/finding.md), [advisory.md](batch-10/crewly/advisory.md),
+  [cvss.md](batch-10/crewly/cvss.md) (published score: 8.8 High), and
+  [poc/](batch-10/crewly/poc/).
 
 ## Resolved (investigated, not a bug)
 

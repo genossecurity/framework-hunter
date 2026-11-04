@@ -1,13 +1,14 @@
-# mcp-hunt — dataset & results summary
+# framework-hunter — dataset & results summary
 
 Static taint analysis + manual triage of the most-downloaded MCP servers, for coordinated
 disclosure and a reproducible dataset. This file aggregates the run; per-repo verdicts are in
-`findings/batch-NN/verdicts.md`, raw data in `~/mcp-hunt-work/scan/{findings.csv,repos.csv}` and
-`targets/funnel.csv`. **Nothing has been filed.**
+`research/findings/exp1-mcp/batch-NN/verdicts.md`, raw data in
+`~/mcp-hunt-work/scan/{findings.csv,repos.csv}` and `research/targets/funnel.csv`. **One finding is disclosed: crewly, published as GHSA-v7q6-5mpg-q47w, CVE
+pending.**
 
 ## Dataset
 
-**Target selection (funnel, `targets/funnel.csv`).** Top 200 npm packages by weekly downloads whose
+**Target selection (funnel, `research/targets/funnel.csv`).** Top 200 npm packages by weekly downloads whose
 repo was reachable, filtered to those that actually build an MCP server exposing tools:
 
 | stage | count |
@@ -67,8 +68,10 @@ execution: `create_github_issue` builds a `gh` shell string with only `"` escape
 in the model-controlled `title`/`body` executes. It bypasses the `validateBashCommand` denylist
 and the approval gate via a classification gap (the tool is in neither `WRITE_TOOLS` nor
 `TOOL_SENSITIVITY`, defaulting to `'safe'`). Confirmed by sandboxed PoC (secrets exfil +
-backdoor write), independently source-reviewed, deduped (no GHSA/PR; unfixed on `main`).
-Full package: `findings/batch-10/crewly/`. **Not filed — pending disclosure decision.**
+backdoor write), independently source-reviewed, deduped (no GHSA/PR at review time).
+Full package: `batch-10/crewly/`. **Published 2026-11-04 as
+[GHSA-v7q6-5mpg-q47w](https://github.com/stevehuang0115/crewly/security/advisories/GHSA-v7q6-5mpg-q47w),
+filed by the maintainer; CVE pending. Affects ≤ 1.20.471, patched in 1.20.472.**
 
 ## What the run shows (for the paper)
 

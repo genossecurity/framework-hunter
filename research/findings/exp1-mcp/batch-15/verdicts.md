@@ -16,4 +16,4 @@ internal-only restriction). Repo renamed to `qabyai/playwright-mcp`. No finding.
 
 ---
 
-**This is the last repo in the funnel.** See `findings/README.md` for the full 141-repo summary.
+**This is the last repo in the funnel.** See `research/findings/exp1-mcp/README.md` for the full 141-repo summary.

@@ -1,10 +1,10 @@
 # Experiment 2 — Agent frameworks, batch 4 (ranks 61–70 of frameworks-top100.txt)
 
-Same method/criterion as prior batches. Scans local-only; **nothing filed**. Work dir
-`~/mcp-hunt-work/exp2`.
+Same method/criterion as prior batches. Scans local-only. **nexent submitted to the maintainer
+2026-11-04 (CVE pending).** Work dir `~/mcp-hunt-work/exp2`.
 
 ## Result: 1 confirmed finding (nexent workspace-confinement bypass, moderate; PoC + dedup done,
-## NOT filed). Rest already-confined / by-design / FP / bundled-MCP-servers.
+## disclosed). Rest already-confined / by-design / FP / bundled-MCP-servers.
 
 | repo | files | taint | priority | verdict |
 |---|---|---|---|---|
@@ -23,8 +23,9 @@ Same method/criterion as prior batches. Scans local-only; **nothing filed**. Wor
 
 ## FINDING — ModelEngine-Group/nexent: workspace-confinement bypass via prefix match
 
-**Status: PoC-confirmed (local, sandboxed, benign); deduped — no public report/GHSA; NOT filed.
-Moderate severity (bounded escape).** HEAD today. PoC: `nexent-poc/` (`poc.py`, `run-transcript.txt`).
+**Status: PoC-confirmed (local, sandboxed, benign); deduped — no public report/GHSA at review time;
+validated 2026-11-03; submitted to the maintainer 2026-11-04; CVE pending. Moderate severity
+(bounded escape).** PoC: `nexent-poc/` (`poc.py`, `run-transcript.txt`).
 
 **Location:** `sdk/nexent/core/tools/{create_file,create_directory,delete_file,delete_directory,
 move_item,read_file,list_directory}_tool.py` — each defines an identical `_validate_path()`:

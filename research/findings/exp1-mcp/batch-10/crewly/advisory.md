@@ -1,23 +1,23 @@
-# Security advisory (DRAFT — not sent)
+# Security advisory (published as GHSA-v7q6-5mpg-q47w)
 
 > Written for: the crewly maintainer, for coordinated disclosure via GitHub private security
-> advisory. This is a scaffold for the reporter to review and submit; **nothing has been sent
-> or filed.** Fill the bracketed fields before submitting.
+> advisory. **Published 2026-11-04 as
+> [GHSA-v7q6-5mpg-q47w](https://github.com/stevehuang0115/crewly/security/advisories/GHSA-v7q6-5mpg-q47w);
+> CVE pending.** This is the local pre-submission copy; the published advisory is authoritative.
 
 **Title:** OS command injection in the read-only Auditor agent's `create_github_issue` tool
 (shell-metacharacter injection via issue `title`/`body`) leads to arbitrary command execution
 
 **Affected product:** `crewly` (npm `crewly`) — `packages/crewly-agent` Auditor runtime
-**Affected versions:** ≤ 1.20.470. The vulnerable `auditor-tools.ts` is unchanged since commit
-`d1b89f94` (2026-06-11) through the current `main` (pushed 2026-11-02) — present and unfixed on
-the default branch. [Confirm the earliest affected release.]
-**Fixed in:** none as of this writing.
+**Affected versions:** ≤ 1.20.471 (per the published advisory). The vulnerable `auditor-tools.ts`
+was unchanged from commit `d1b89f94` (2026-06-11) through `main` as reviewed on 2026-11-02.
+**Fixed in:** 1.20.472.
 **Prior disclosure:** none found — no GHSA advisory, no security issue/PR, no CHANGELOG fix
 entry (issue `#178` is the *feature* that added the tool, not a vuln report).
 **CWE:** CWE-78 (OS Command Injection), CWE-77; secondary CWE-184 (incomplete escaping)
-**Severity:** High — CVSS 3.1 **8.7** `AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H` (see `cvss.md` /
+**Severity:** High — CVSS 3.1 **8.8** `AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H` (see `cvss.md` /
 `cvss.pdf` for scoring and the range under alternative assumptions).
-**Reporter:** [your name / handle], [contact] · **Disclosure policy:** 90-day coordinated.
+**Reporter:** genossecurity · **Disclosure policy:** 90-day coordinated.
 
 ---
 

@@ -1,4 +1,4 @@
-# Fixtures for rules/mcp-helper.yaml (Python helper tier).
+# Fixtures for rules/tool-helper.yaml (Python helper tier).
 # A 'ruleid' annotation means the next line MUST be flagged by that rule;
 # an 'ok' annotation means it must NOT be flagged.
 # Shapes mirror real MCP CVEs: the @mcp.tool handler calls a helper in another
@@ -12,7 +12,7 @@ import requests
 
 
 async def execute_pipe_command(pipe_command: str) -> str:
-    # ruleid: mcp-py-command-injection-helper
+    # ruleid: tool-py-command-injection-helper
     proc = await asyncio.create_subprocess_shell(pipe_command, stdout=asyncio.subprocess.PIPE)
     out, _ = await proc.communicate()
     return out.decode()
@@ -20,34 +20,34 @@ async def execute_pipe_command(pipe_command: str) -> str:
 
 class Executor:
     def run(self, cmd: str) -> int:
-        # ruleid: mcp-py-command-injection-helper
+        # ruleid: tool-py-command-injection-helper
         return os.system(cmd)
 
     def version(self) -> int:
-        # ok: mcp-py-command-injection-helper
+        # ok: tool-py-command-injection-helper
         return os.system("aws --version")
 
     def clone(self, url: str) -> None:
-        # ruleid: mcp-py-argument-injection-helper
+        # ruleid: tool-py-argument-injection-helper
         subprocess.run(["git", "clone", url], check=True)
 
 
 def read_any(path: str) -> str:
-    # ruleid: mcp-py-path-traversal-helper
+    # ruleid: tool-py-path-traversal-helper
     with open(path) as f:
         return f.read()
 
 
 def get_page(url: str) -> str:
-    # ruleid: mcp-py-ssrf-helper
+    # ruleid: tool-py-ssrf-helper
     return requests.get(url, timeout=5).text
 
 
 def restore(blob: bytes):
-    # ruleid: mcp-py-code-injection-helper
+    # ruleid: tool-py-code-injection-helper
     return pickle.loads(blob)
 
 
 def uses_self_only(self) -> int:
-    # ok: mcp-py-command-injection-helper
+    # ok: tool-py-command-injection-helper
     return os.system("true")

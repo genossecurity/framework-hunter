@@ -1,9 +1,9 @@
 # Experiment 2 — Agent frameworks, batch 3 (ranks 71–80 of frameworks-top100.txt)
 
-Same method/criterion as batches 1–2. Scans local-only; **nothing filed**. Work dir
-`~/mcp-hunt-work/exp2`.
+Same method/criterion as batches 1–2. Scans local-only. **youtu-agent submitted to the maintainer
+2026-11-04 (CVE pending).** Work dir `~/mcp-hunt-work/exp2`.
 
-## Result: 1 net-new finding (youtu-agent `eval` RCE, PoC-confirmed, deduped non-public, NOT filed);
+## Result: 1 net-new finding (youtu-agent `eval` RCE, PoC-confirmed, deduped non-public, disclosed);
 ## 1 secondary low-confidence note (agency-swarm). Rest by-design / already-confined / FP.
 
 | repo | files | taint | priority | verdict |
@@ -23,8 +23,8 @@ Same method/criterion as batches 1–2. Scans local-only; **nothing filed**. Wor
 
 ## FINDING — TencentCloudADP/youtu-agent: RCE via `eval()` of model output in the ReAct parser
 
-**Status: PoC-confirmed (local, sandboxed, benign); deduped — no public report/GHSA; NOT filed.
-Awaiting user disclosure decision.** Local clone only; HEAD today.
+**Status: PoC-confirmed (local, sandboxed, benign); deduped — no public report/GHSA at review time;
+validated 2026-11-03; submitted to the maintainer 2026-11-04; CVE pending.** Local clone only.
 
 **Location:** `utu/models/react_converter.py`, `ReactConverter._parse_react_output()` (~L202–207).
 

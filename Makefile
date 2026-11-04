@@ -4,9 +4,9 @@ SEMGREP_OPTS = --metrics off --disable-version-check
 help:
 	@echo "make rules     regenerate rules from tools/gen_rules.py"
 	@echo "make test      unit-test every rule against tests/ fixtures"
-	@echo "make recall    re-find 4 published MCP CVEs at their vulnerable versions"
+	@echo "make recall    re-find 5 published MCP CVEs/advisories at their vulnerable versions"
 	@echo "make discover  build repos.txt (GitHub + npm)"
-	@echo "make scan      scan repos.txt -> mcp-scan/{findings.csv,repos.csv,summary.md}"
+	@echo "make scan      scan repos.txt -> hunter-scan/{findings.csv,repos.csv,summary.md}"
 	@echo "make hunt      scan one server: make hunt DIR=path-or-owner/repo"
 
 rules:
@@ -25,7 +25,7 @@ scan:
 	python3 src/scan.py repos.txt
 
 clean:
-	rm -rf .recall mcp-scan
+	rm -rf .recall hunter-scan
 
 hunt:
 	@[ -n "$(DIR)" ] || { echo "usage: make hunt DIR=path-or-owner/repo"; exit 2; }

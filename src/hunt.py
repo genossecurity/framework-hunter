@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Hunt one MCP server: scan it, print the triage queue, save a report.
+"""Hunt one target: scan it, print the triage queue, save a report.
 
   src/hunt.py ./path/to/server             # a directory you already have
   src/hunt.py owner/repo                   # clone from GitHub first
@@ -17,7 +17,7 @@ What you get, on the terminal and in <work>/report.md:
   - for GitHub repos: public issues/PRs and advisories that may already cover a finding
 
 Semgrep only parses the target; nothing in it is installed or run. Outputs land under
-$MCP_HUNT_WORK/hunt/<slug> (default ~/mcp-hunt-work), outside this repo.
+$FRAMEWORK_HUNTER_WORK/hunt/<slug> (default ~/framework-hunter-work), outside this repo.
 """
 from __future__ import annotations
 
@@ -51,11 +51,11 @@ GITHUB_RE = re.compile(r"github\.com[:/]([\w.-]+)/([\w.-]+?)(?:\.git)?/?$")
 def ensure_semgrep() -> None:
     if shutil.which("semgrep"):
         return
-    for venv in (os.environ.get("MCP_HUNT_VENV"), ROOT / ".venv", Path.home() / "mcp-hunt-work" / ".venv"):
+    for venv in (os.environ.get("FRAMEWORK_HUNTER_VENV"), ROOT / ".venv", Path.home() / "framework-hunter-work" / ".venv"):
         if venv and (Path(venv) / "bin" / "semgrep").exists():
             os.environ["PATH"] = f"{Path(venv) / 'bin'}{os.pathsep}{os.environ['PATH']}"
             return
-    sys.exit("semgrep not found: pip install semgrep==1.183.0, or set MCP_HUNT_VENV to a venv that has it")
+    sys.exit("semgrep not found: pip install semgrep==1.183.0, or set FRAMEWORK_HUNTER_VENV to a venv that has it")
 
 
 def github_repo(target: str, root: Path | None) -> str | None:
@@ -73,7 +73,7 @@ def github_repo(target: str, root: Path | None) -> str | None:
 
 
 def gh_json(url: str):
-    req = urllib.request.Request(url, headers={"Accept": "application/vnd.github+json", "User-Agent": "mcp-hunt"})
+    req = urllib.request.Request(url, headers={"Accept": "application/vnd.github+json", "User-Agent": "framework-hunter"})
     tok = os.environ.get("GITHUB_TOKEN")
     if tok:
         req.add_header("Authorization", f"Bearer {tok}")
@@ -171,7 +171,7 @@ def short_rule(rule: str) -> str:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("target", help="local directory, owner/repo, or GitHub URL")
-    ap.add_argument("--work", help="output dir (default $MCP_HUNT_WORK/hunt/<slug>)")
+    ap.add_argument("--work", help="output dir (default $FRAMEWORK_HUNTER_WORK/hunt/<slug>)")
     ap.add_argument("--audit", action="store_true", help="also run the noisy sink-only audit tier")
     ap.add_argument("--no-helper", action="store_true", help="taint tier only")
     ap.add_argument("--no-github", action="store_true", help="skip the prior-reports lookup")
@@ -182,7 +182,7 @@ def main() -> int:
     target = args.target
     local = os.path.isdir(target)
     slug = slug_for(target)
-    work = Path(args.work) if args.work else Path(os.environ.get("MCP_HUNT_WORK", Path.home() / "mcp-hunt-work")) / "hunt" / slug
+    work = Path(args.work) if args.work else Path(os.environ.get("FRAMEWORK_HUNTER_WORK", Path.home() / "framework-hunter-work")) / "hunt" / slug
     work.mkdir(parents=True, exist_ok=True)
 
     cmd = [sys.executable, "-u", str(HERE / "scan.py"), "--work", str(work)]
@@ -205,7 +205,7 @@ def main() -> int:
     demoted = [r for r in rows if r.get("auto_notes")]
     rest = [r for r in rows if not is_priority(r) and not r.get("auto_notes")]
 
-    L = [f"# mcp-hunt report: {target}", ""]
+    L = [f"# framework-hunter report: {target}", ""]
     L += [f"- commit `{stats.get('commit')}`, package `{stats.get('package_version') or '?'}`, "
           f"{stats.get('files_scanned')} files scanned",
           f"- MCP server code: {'yes' if surf['mcp_server'] else 'NOT detected (client/SDK/other?)'}; "
