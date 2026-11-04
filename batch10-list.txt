@@ -1,0 +1,10 @@
+agno-agi/agno
+langchain-ai/langgraph
+AstrBotDevs/AstrBot
+HKUDS/nanobot
+run-llama/llama_index
+crewAIInc/crewAI
+microsoft/autogen
+FoundationAgents/MetaGPT
+browser-use/browser-use
+langchain-ai/langchain

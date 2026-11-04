@@ -1,0 +1,10 @@
+truefoundry/trueforge
+withastro/flue
+zai-org/Open-AutoGLM
+TencentQQGYLab/AppAgent
+katanaml/sparrow
+droidrun/mobilerun
+camel-ai/oasis
+sentient-agi/ROMA
+icip-cas/PPTAgent
+ApodexAI/FrontierAgent

@@ -1,0 +1,10 @@
+julep-ai/julep
+tensortrade-org/tensortrade
+kyegomez/swarms
+2FastLabs/agent-squad
+steel-dev/steel-browser
+plastic-labs/honcho
+Upsonic/Upsonic
+GetStream/Vision-Agents
+anthropics/claude-agent-sdk-python
+lastmile-ai/mcp-agent

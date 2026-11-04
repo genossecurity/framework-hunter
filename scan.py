@@ -50,6 +50,10 @@ EXCLUDES = ["node_modules", "dist", "build", "out", ".next", "vendor", "venv", "
             # per-rule taint timeout (minutes/file) and yields nothing — not reviewable source
             "*.min.js", "*.min.mjs", "*.min.cjs", "*.bundle.js", "*.bundle.mjs", "*.bundle.cjs",
             "*-bundle.js", "*-bundle.mjs", "*.d.ts",
+            # generated code artifacts (not hand-written source): e.g. Builder.io's
+            # .generated/ trees and *.bridge.ts glue — huge and pathological for taint
+            ".generated", "*.generated.ts", "*.generated.js", "*.generated.tsx",
+            "*.generated.jsx", "*.bridge.ts", "*.gen.ts", "*.gen.js",
             # not shipped server code: findings here are not reachable from a tool
             "test", "tests", "__tests__", "spec", "specs", "e2e", "e2e-tests", "fixtures",
             "examples", "example", "explorations", ".spike-*", ".claude", ".cursor", ".github",
@@ -67,6 +71,7 @@ EXCLUDES = ["node_modules", "dist", "build", "out", ".next", "vendor", "venv", "
 # performing taint analysis", the message that means a function's taint findings were dropped.
 SEMGREP_FLAGS = ["--json", "--debug", "--metrics", "off", "--disable-version-check",
                  "--timeout", "120", "--timeout-threshold", "0",
+                 "--jobs", str(os.cpu_count() or 8),   # use all cores
                  "--max-target-bytes", "2000000", "--no-git-ignore"]
 FIXPOINT_RE = re.compile(r"Fixpoint timeout while performing taint analysis at (\S+?):\d+:\d+")
 
@@ -88,7 +93,8 @@ JS_TOOL_RE = re.compile(
     r"""|\b(\w+)\s*:\s*\{[^{}]*?\b(?:parameters|inputSchema)\s*:[^{}]{0,300}?\b(?:execute|handler)\s*:""",     # run_it: { parameters, execute }
     re.S)
 JS_SWITCH_RE = re.compile(r"""case\s+['"`]([\w\-.:/]+)['"`]\s*:""")
-PY_DECO_RE = re.compile(r"^\s*@[\w.]+\.(?:tool|call_tool)\b.*$")
+PY_DECO_RE = re.compile(
+    r"^\s*@(?:[\w.]+\.)?(?:tool|call_tool|function_tool|kernel_function|tool_plain|agent_tool)\b.*$")
 PY_DEF_RE = re.compile(r"^\s*(?:async\s+)?def\s+(\w+)\s*\(")
 SRC_EXT = {".ts", ".tsx", ".mts", ".cts", ".js", ".mjs", ".cjs", ".jsx", ".py"}
 
@@ -276,14 +282,24 @@ TOOLFILE_RE = re.compile(
     r"""|\b(?:server|mcp|mcpServer)\.(?:resource|registerResource|prompt|registerPrompt)\("""
     r"""|(?<![.\w])(?:tool|defineTool|createTool|injectableTool|mcpTool)\(\s*\{"""
     r"""|\b(?:parameters|inputSchema)\s*:[\s\S]{0,3000}?\b(?:execute|handler)\s*:"""
-    r"""|@[\w.]+\.(?:tool|call_tool|resource|read_resource|prompt|get_prompt)\b""")
+    r"""|@[\w.]+\.(?:tool|call_tool|resource|read_resource|prompt|get_prompt)\b"""
+    # agent-framework tool definitions (experiment 2)
+    r"""|^\s*@(?:[\w.]+\.)?(?:tool|function_tool|kernel_function|tool_plain|agent_tool)\b"""
+    r"""|\bclass\s+\w+\s*\([^)]*\b(?:BaseTool|StructuredTool)\b"""
+    r"""|\b(?:FunctionTool|StructuredTool|DynamicStructuredTool|DynamicTool|Tool)\s*(?:\.from_\w+\s*)?\("""
+    r"""|\bnew\s+(?:DynamicStructuredTool|DynamicTool)\b""", re.M)
 TOOL_SITE_RE = re.compile(
     r"""\.(?:tool|registerTool|addTool)\("""
     r"""|setRequestHandler\(\s*(?:CallToolRequestSchema|ListToolsRequestSchema|['"]tools/(?:call|list)['"])"""
     r"""|fallbackRequestHandler"""
     r"""|(?<![.\w])(?:tool|defineTool|createTool|injectableTool|mcpTool)\(\s*[{'"`]"""
     r"""|\b(?:parameters|inputSchema)\s*:[^{}]{0,300}?\b(?:execute|handler)\s*:"""
-    r"""|@[\w.]+\.(?:tool|call_tool)\b""")
+    r"""|@[\w.]+\.(?:tool|call_tool)\b"""
+    # agent-framework tool definitions (experiment 2)
+    r"""|^\s*@(?:[\w.]+\.)?(?:tool|function_tool|kernel_function|tool_plain|agent_tool)\b"""
+    r"""|\bclass\s+\w+\s*\([^)]*\b(?:BaseTool|StructuredTool)\b"""
+    r"""|\bnew\s+(?:DynamicStructuredTool|DynamicTool)\b"""
+    r"""|\b(?:FunctionTool|StructuredTool)\s*\.from_\w+\s*\(""", re.M)
 # tool definition modules, registered elsewhere by reference:
 #   export const getFigmaDataTool = { name: "get_figma_data", description, parameters, handler: getFigmaData }
 #   export const metadata = { name: "nextjs_call", ... }; export async function handler(args) {...}
@@ -512,8 +528,17 @@ def minified_files(root: Path) -> list[str]:
             if sz < 50_000:
                 continue
             with open(p, "rb") as f:
-                head = f.read(200_000)
-            if sz / (head.count(b"\n") or 1) > 2_000:   # avg line > 2 KB => minified/bundled
+                blob = f.read(1_200_000)
+            head = blob[:200_000]
+            lines = blob.count(b"\n") or 1
+            # minified/bundled: one giant line.  OR huge-but-short-line generated code
+            # (e.g. a 1 MB, 32k-line generated bridge file) — also pathological for the
+            # taint fixpoint and never hand-reviewed. Both are excluded from the scan.
+            if (sz / (head.count(b"\n") or 1) > 2_000          # avg line > 2 KB
+                    or sz > 400_000                            # >400 KB single file: data blob / mega-file
+                    or (sz > 150_000 and lines > 4_000)):      # big generated code
+                # A big hand-written handler file is still covered: scan.py re-scans each
+                # tool registration as its own small chunk, so registrations aren't lost here.
                 out.append(str(p.relative_to(root)))
         except OSError:
             continue

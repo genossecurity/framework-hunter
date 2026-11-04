@@ -179,3 +179,62 @@ def read_resource_file(name: str):
 def prompt_cmd(cmd: str):
     # ruleid: mcp-py-command-injection
     return subprocess.run(cmd, shell=True)
+
+
+# =================== agent-framework tool sources (experiment 2) ===================
+# Decorators/classes are undefined here on purpose: semgrep matches syntactically.
+# langchain / crewai / smolagents: @tool
+@tool
+def lc_run(command: str) -> str:
+    # ruleid: mcp-py-command-injection
+    return subprocess.run(command, shell=True, capture_output=True, text=True).stdout
+
+
+@tool("read_file", description="read a file")
+def lc_read(path: str) -> str:
+    # ruleid: mcp-py-path-traversal
+    return open(path).read()
+
+
+# a @tool with a static command must NOT flag (nothing flows from the param)
+@tool
+def lc_static(n: int) -> str:
+    # ok: mcp-py-command-injection
+    return subprocess.run(["ls", "-la"], capture_output=True, text=True).stdout + str(n)
+
+
+# openai-agents: @function_tool
+@function_tool
+def oa_fetch(url: str) -> str:
+    # ruleid: mcp-py-ssrf
+    return requests.get(url, timeout=5).text
+
+
+# semantic-kernel: @kernel_function
+@kernel_function(name="calc")
+def sk_calc(expr: str) -> str:
+    # ruleid: mcp-py-code-injection
+    return str(eval(expr))
+
+
+# pydantic-ai: @agent.tool_plain
+@agent.tool_plain
+def pa_sql(name: str) -> str:
+    cur = sqlite3.connect("app.db").cursor()
+    # ruleid: mcp-py-sql-injection
+    cur.execute(f"SELECT * FROM users WHERE name = '{name}'")
+    return repr(cur.fetchall())
+
+
+# langchain / crewai class tool: BaseTool._run
+class ShellTool(BaseTool):
+    def _run(self, command: str) -> str:
+        # ruleid: mcp-py-command-injection
+        return subprocess.run(command, shell=True, capture_output=True, text=True).stdout
+
+
+# smolagents class tool: Tool.forward
+class FetchTool(Tool):
+    def forward(self, url: str) -> str:
+        # ruleid: mcp-py-ssrf
+        return requests.get(url, timeout=5).text

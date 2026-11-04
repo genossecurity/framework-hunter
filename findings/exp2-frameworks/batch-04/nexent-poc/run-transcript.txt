@@ -1,0 +1,10 @@
+intended (inside)          input='notes.txt'
+   -> ACCEPTED as '/work/mnt/nexent/notes.txt'   inside-workspace? True
+traversal to parent        input='../../../etc/shadow'
+   -> BLOCKED (Permission denied: outside workspace '/work/mnt/nexent')
+ATTACK: sibling prefix     input='/work/mnt/nexent-secrets/stolen.txt'
+   -> ACCEPTED as '/work/mnt/nexent-secrets/stolen.txt'   inside-workspace? False
+ATTACK: prefix no-sep      input='/work/mnt/nexentX/evil.txt'
+   -> ACCEPTED as '/work/mnt/nexentX/evil.txt'   inside-workspace? False
+
+RESULT: ESCAPE CONFIRMED — validator accepted + wrote OUTSIDE the workspace: /work/mnt/nexent-secrets/CANARY.txt

@@ -41,6 +41,15 @@ JS_CONTAINERS = [
     "$S.registerResource(..., {H})",
     "$S.prompt(..., {H})",
     "$S.registerPrompt(..., {H})",
+    # agent-framework tools (experiment 2). Vercel AI / Mastra / genkit / VoltAgent
+    # `tool({{ parameters/inputSchema, execute }})` shapes are already covered by the
+    # factory patterns above. These add LangChain.js, which is function-first:
+    #   tool(async (input) => {{...}}, {{ name, schema }})     and the Dynamic*Tool classes
+    "tool({H}, {{..., schema: $SCHEMA, ...}})",
+    "tool({H}, {{..., name: $NAME, ...}})",
+    "new DynamicStructuredTool({{..., func: {H}, ...}})",
+    "new DynamicTool({{..., func: {H}, ...}})",
+    "$F.from_function({H}, ...)",
 ]
 # Low-level SDK handlers, by schema object or by method name (newer SDKs).
 JS_REQUEST_METHODS = ["CallToolRequestSchema", '"tools/call"', "ReadResourceRequestSchema",
@@ -99,11 +108,32 @@ def js_sources():
 
 def py_sources():
     either = []
+    # MCP SDK decorators (mcp.tool / call_tool / resources / prompts).
     for deco in ("@$M.tool(...)", "@$M.tool", "@$M.call_tool(...)", "@$M.call_tool",
                  "@$M.resource(...)", "@$M.read_resource(...)", "@$M.prompt(...)", "@$M.get_prompt(...)"):
         for kw in ("def", "async def"):
             either.append({"pattern-inside": f"{deco}\n{kw} $F(..., $P, ...):\n  ...\n"})
-    return [{"patterns": [{"pattern-either": either}, {"focus-metavariable": "$P"}]}]
+    # Agent-framework tool decorators (experiment 2): the decorated function's
+    # parameters are LLM-/prompt-controlled, like an MCP tool argument.
+    #   langchain / crewai / smolagents  @tool            (bare or @mod.tool, covered above)
+    #   openai-agents                    @function_tool
+    #   semantic-kernel                  @kernel_function
+    #   pydantic-ai                      @agent.tool_plain (@agent.tool covered above)
+    #   google-adk / llama-index         @FunctionTool / wrappers (name-based, below)
+    for deco in ("@tool(...)", "@tool", "@function_tool(...)", "@function_tool",
+                 "@$M.function_tool(...)", "@$M.function_tool",
+                 "@kernel_function(...)", "@kernel_function", "@$M.kernel_function(...)", "@$M.kernel_function",
+                 "@$M.tool_plain(...)", "@$M.tool_plain", "@$M.agent_tool(...)", "@$M.agent_tool"):
+        for kw in ("def", "async def"):
+            either.append({"pattern-inside": f"{deco}\n{kw} $F(..., $P, ...):\n  ...\n"})
+    # Class-based tools: langchain/crewai BaseTool define _run/_arun; smolagents
+    # Tool defines forward. The execute method receives the tool call arguments.
+    for meth in ("_run", "_arun", "forward"):
+        for kw in ("def", "async def"):
+            either.append({"pattern-inside": f"{kw} {meth}(self, ..., $P, ...):\n  ...\n"})
+    return [{"patterns": [{"pattern-either": either},
+                          {"metavariable-regex": {"metavariable": "$P", "regex": "^(?!self$|cls$)"}},
+                          {"focus-metavariable": "$P"}]}]
 
 
 # Helper tier: real servers dispatch from the tool handler into helper

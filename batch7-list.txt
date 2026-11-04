@@ -1,0 +1,10 @@
+omnigent-ai/omnigent
+The-Pocket/PocketFlow
+simular-ai/Agent-S
+neuml/txtai
+microsoft/agent-framework
+livekit/agents
+GreyDGL/PentestGPT
+ag-ui-protocol/ag-ui
+pipecat-ai/pipecat
+QwenLM/Qwen-Agent

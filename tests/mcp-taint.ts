@@ -307,3 +307,33 @@ server.addTool({
     return readFile(filePath);
   },
 });
+
+// =================== agent-framework tool sources (experiment 2) ===================
+// Vercel AI SDK / Mastra / genkit / VoltAgent: tool({ parameters, execute }) — the
+// object-first factory shape already covered by the MCP factory patterns.
+const runTool = aiTool({
+  description: "run a shell command",
+  parameters: z.object({ cmd: z.string() }),
+  execute: async ({ cmd }: { cmd: string }) => {
+    // ruleid: mcp-js-command-injection
+    return execSync(cmd).toString();
+  },
+});
+
+// LangChain.js: function-first tool(fn, { name, schema })
+const lcTool = tool(
+  async (input: { cmd: string }) => {
+    // ruleid: mcp-js-command-injection
+    return execSync(input.cmd).toString();
+  },
+  { name: "run", schema: z.object({ cmd: z.string() }) }
+);
+
+// LangChain.js: DynamicTool({ func })
+const dyn = new DynamicTool({
+  name: "fetch",
+  func: async (url: string) => {
+    // ruleid: mcp-js-ssrf
+    return (await axios.get(url)).data;
+  },
+});

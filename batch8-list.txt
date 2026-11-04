@@ -1,0 +1,10 @@
+TransformerOptimus/SuperAGI
+camel-ai/camel
+Canner/WrenAI
+microsoft/agent-lightning
+agent0ai/agent-zero
+pydantic/pydantic-ai
+camel-ai/owl
+langchain-ai/langchainjs
+google/adk-python
+openai/swarm

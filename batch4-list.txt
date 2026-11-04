@@ -1,0 +1,10 @@
+potpie-ai/potpie
+Klavis-AI/klavis
+AgentOps-AI/agentops
+aiwaves-cn/agents
+ModelEngine-Group/nexent
+microsoft/CUAWright
+browser-act/skills
+lavague-ai/LaVague
+crestalnetwork/intentkit
+genkit-ai/genkit

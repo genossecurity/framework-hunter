@@ -2130,6 +2130,546 @@ rules:
           '
     - pattern: $K
   - patterns:
+    - pattern-inside: 'tool(async ($ARGS, ...) => {...}, {..., schema: $SCHEMA, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'tool(($ARGS, ...) => {...}, {..., schema: $SCHEMA, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'tool(async function ($ARGS, ...) {...}, {..., schema: $SCHEMA, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'tool(function ($ARGS, ...) {...}, {..., schema: $SCHEMA, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'tool(async ($ARGS: $T, ...) => {...}, {..., schema: $SCHEMA, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'tool(($ARGS: $T, ...) => {...}, {..., schema: $SCHEMA, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'tool(async ({..., $K, ...}: $T, ...) => {...}, {..., schema: $SCHEMA, ...})'
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'tool(({..., $K, ...}: $T, ...) => {...}, {..., schema: $SCHEMA, ...})'
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'tool(async ($ARGS, ...) => {...}, {..., schema: $SCHEMA, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'tool(($ARGS, ...) => {...}, {..., schema: $SCHEMA, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'tool(async function ($ARGS, ...) {...}, {..., schema: $SCHEMA, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'tool(function ($ARGS, ...) {...}, {..., schema: $SCHEMA, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'tool(async ($ARGS: $T, ...) => {...}, {..., schema: $SCHEMA, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'tool(($ARGS: $T, ...) => {...}, {..., schema: $SCHEMA, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'tool(async ($ARGS, ...) => {...}, {..., name: $NAME, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'tool(($ARGS, ...) => {...}, {..., name: $NAME, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'tool(async function ($ARGS, ...) {...}, {..., name: $NAME, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'tool(function ($ARGS, ...) {...}, {..., name: $NAME, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'tool(async ($ARGS: $T, ...) => {...}, {..., name: $NAME, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'tool(($ARGS: $T, ...) => {...}, {..., name: $NAME, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'tool(async ({..., $K, ...}: $T, ...) => {...}, {..., name: $NAME, ...})'
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'tool(({..., $K, ...}: $T, ...) => {...}, {..., name: $NAME, ...})'
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'tool(async ($ARGS, ...) => {...}, {..., name: $NAME, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'tool(($ARGS, ...) => {...}, {..., name: $NAME, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'tool(async function ($ARGS, ...) {...}, {..., name: $NAME, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'tool(function ($ARGS, ...) {...}, {..., name: $NAME, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'tool(async ($ARGS: $T, ...) => {...}, {..., name: $NAME, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'tool(($ARGS: $T, ...) => {...}, {..., name: $NAME, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'new DynamicStructuredTool({..., func: async ($ARGS, ...) => {...}, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'new DynamicStructuredTool({..., func: ($ARGS, ...) => {...}, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'new DynamicStructuredTool({..., func: async function ($ARGS, ...) {...}, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'new DynamicStructuredTool({..., func: function ($ARGS, ...) {...}, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'new DynamicStructuredTool({..., func: async ($ARGS: $T, ...) => {...}, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'new DynamicStructuredTool({..., func: ($ARGS: $T, ...) => {...}, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'new DynamicStructuredTool({..., func: async ({..., $K, ...}: $T, ...) => {...}, ...})'
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'new DynamicStructuredTool({..., func: ({..., $K, ...}: $T, ...) => {...}, ...})'
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'new DynamicStructuredTool({..., func: async ($ARGS, ...) => {...}, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'new DynamicStructuredTool({..., func: ($ARGS, ...) => {...}, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'new DynamicStructuredTool({..., func: async function ($ARGS, ...) {...}, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'new DynamicStructuredTool({..., func: function ($ARGS, ...) {...}, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'new DynamicStructuredTool({..., func: async ($ARGS: $T, ...) => {...}, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'new DynamicStructuredTool({..., func: ($ARGS: $T, ...) => {...}, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'new DynamicTool({..., func: async ($ARGS, ...) => {...}, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'new DynamicTool({..., func: ($ARGS, ...) => {...}, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'new DynamicTool({..., func: async function ($ARGS, ...) {...}, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'new DynamicTool({..., func: function ($ARGS, ...) {...}, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'new DynamicTool({..., func: async ($ARGS: $T, ...) => {...}, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'new DynamicTool({..., func: ($ARGS: $T, ...) => {...}, ...})'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: 'new DynamicTool({..., func: async ({..., $K, ...}: $T, ...) => {...}, ...})'
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'new DynamicTool({..., func: ({..., $K, ...}: $T, ...) => {...}, ...})'
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'new DynamicTool({..., func: async ($ARGS, ...) => {...}, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'new DynamicTool({..., func: ($ARGS, ...) => {...}, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'new DynamicTool({..., func: async function ($ARGS, ...) {...}, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'new DynamicTool({..., func: function ($ARGS, ...) {...}, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'new DynamicTool({..., func: async ($ARGS: $T, ...) => {...}, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: 'new DynamicTool({..., func: ($ARGS: $T, ...) => {...}, ...})'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: $F.from_function(async ($ARGS, ...) => {...}, ...)
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: $F.from_function(($ARGS, ...) => {...}, ...)
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: $F.from_function(async function ($ARGS, ...) {...}, ...)
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: $F.from_function(function ($ARGS, ...) {...}, ...)
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: '$F.from_function(async ($ARGS: $T, ...) => {...}, ...)'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: '$F.from_function(($ARGS: $T, ...) => {...}, ...)'
+    - focus-metavariable: $ARGS
+  - patterns:
+    - pattern-inside: '$F.from_function(async ({..., $K, ...}: $T, ...) => {...}, ...)'
+    - pattern: $K
+  - patterns:
+    - pattern-inside: '$F.from_function(({..., $K, ...}: $T, ...) => {...}, ...)'
+    - pattern: $K
+  - patterns:
+    - pattern-inside: $F.from_function(async ($ARGS, ...) => {...}, ...)
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: $F.from_function(($ARGS, ...) => {...}, ...)
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: $F.from_function(async function ($ARGS, ...) {...}, ...)
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: $F.from_function(function ($ARGS, ...) {...}, ...)
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: '$F.from_function(async ($ARGS: $T, ...) => {...}, ...)'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
+    - pattern-inside: '$F.from_function(($ARGS: $T, ...) => {...}, ...)'
+    - pattern-either:
+      - pattern-inside: 'const {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+      - pattern-inside: 'let {..., $K, ...} = $ARGS as $T2;
+
+          ...
+
+          '
+    - pattern: $K
+  - patterns:
     - pattern-inside: $S.resource(..., async ($URI, $ARGS, ...) => {...})
     - focus-metavariable: $ARGS
   - patterns:
@@ -2444,6 +2984,43 @@ rules:
       - pattern-inside: "@$M.prompt(...)\nasync def $F(..., $P, ...):\n  ...\n"
       - pattern-inside: "@$M.get_prompt(...)\ndef $F(..., $P, ...):\n  ...\n"
       - pattern-inside: "@$M.get_prompt(...)\nasync def $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@tool(...)\ndef $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@tool(...)\nasync def $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@tool\ndef $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@tool\nasync def $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@function_tool(...)\ndef $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@function_tool(...)\nasync def $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@function_tool\ndef $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@function_tool\nasync def $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@$M.function_tool(...)\ndef $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@$M.function_tool(...)\nasync def $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@$M.function_tool\ndef $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@$M.function_tool\nasync def $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@kernel_function(...)\ndef $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@kernel_function(...)\nasync def $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@kernel_function\ndef $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@kernel_function\nasync def $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@$M.kernel_function(...)\ndef $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@$M.kernel_function(...)\nasync def $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@$M.kernel_function\ndef $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@$M.kernel_function\nasync def $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@$M.tool_plain(...)\ndef $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@$M.tool_plain(...)\nasync def $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@$M.tool_plain\ndef $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@$M.tool_plain\nasync def $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@$M.agent_tool(...)\ndef $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@$M.agent_tool(...)\nasync def $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@$M.agent_tool\ndef $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "@$M.agent_tool\nasync def $F(..., $P, ...):\n  ...\n"
+      - pattern-inside: "def _run(self, ..., $P, ...):\n  ...\n"
+      - pattern-inside: "async def _run(self, ..., $P, ...):\n  ...\n"
+      - pattern-inside: "def _arun(self, ..., $P, ...):\n  ...\n"
+      - pattern-inside: "async def _arun(self, ..., $P, ...):\n  ...\n"
+      - pattern-inside: "def forward(self, ..., $P, ...):\n  ...\n"
+      - pattern-inside: "async def forward(self, ..., $P, ...):\n  ...\n"
+    - metavariable-regex:
+        metavariable: $P
+        regex: ^(?!self$|cls$)
     - focus-metavariable: $P
   pattern-sinks:
   - patterns:

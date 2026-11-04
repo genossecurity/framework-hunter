@@ -1,0 +1,10 @@
+darrenhinde/OpenAgentsControl
+ag2ai/ag2
+FellouAI/eko
+superduper-io/superduper
+Integuru-AI/Integuru
+rowboatlabs/rowboat
+aipotheosis-labs/aci
+VRSEN/agency-swarm
+TencentCloudADP/youtu-agent
+vercel/eve

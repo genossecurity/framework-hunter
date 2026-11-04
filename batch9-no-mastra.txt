@@ -1,0 +1,9 @@
+topoteretes/cognee
+deepset-ai/haystack
+vercel/ai
+microsoft/semantic-kernel
+mem0ai/mem0
+TencentCloud/TencentDB-Agent-Memory
+ComposioHQ/composio
+huggingface/smolagents
+openai/openai-agents-python
