@@ -2,7 +2,8 @@
 
 *Written for: engineers/reviewers new to this repo (and as the write-up behind the paper). It
 explains how the scanner decides what to surface at each step, and — for the agent-framework run
-(experiment 2) — what each confirmed PoC was looking for and what it found.*
+(experiment 2) — what each confirmed PoC was looking for and what it found. Non-technical readers:
+each stage in Part 1 opens with a plain-English summary.*
 
 The scanner **finds candidates; a human decides verdicts.** Every automated step below is a *filter
 or a ranking input*, never a bug count. The only step that declares a vulnerability is manual triage
@@ -114,6 +115,11 @@ triage(r):                                         # ---- GATE 7: the finding cr
 ```
 
 ### 1. Target selection (the funnel)
+**In plain English:** We start with a list of widely used AI software projects and cross off anything
+we can't meaningfully test: projects that no longer exist, are written in programming languages our
+tool can't read, or are only tutorials or lists of links. What remains is software that lets an AI
+take real actions, which is where the risk lies.
+
 Pick the population, then keep only real, analyzable targets.
 
 - **Exp 1 (MCP servers):** top-200 npm packages by weekly downloads.
@@ -130,6 +136,10 @@ Pick the population, then keep only real, analyzable targets.
 - it is not an awesome-list / tutorial / prompt dump / end-user app masquerading as a library.
 
 ### 2. Clone
+**In plain English:** We download a copy of each project's latest code to our own machine, so our
+analysis never touches anyone's live system. If a project is too enormous to scan in a reasonable
+time, we skip it or look only at its relevant parts, so that it doesn't hold up the rest.
+
 Shallow (`git clone --depth 1 --no-tags`), atomic (clone to `*.partial`, rename on success so an
 interrupted clone never looks finished), 5-min timeout, `GIT_TERMINAL_PROMPT=0` (never hang on auth).
 
@@ -139,6 +149,26 @@ it is **skipped** (or scoped to its framework packages) rather than stalling a b
 (~8k effective) was deferred and run alone.
 
 ### 3. Semgrep — three source tiers
+**In plain English:** An automated tool reads the code and flags places where information from an AI
+could reach something dangerous, such as running a command, opening a file or querying a database.
+It can search narrowly (more reliable) or broadly (catches more, but with more false alarms), and it
+repeats the scan because a single pass can miss things. Everything it flags is only a lead to check,
+not a confirmed problem.
+
+The tool is Semgrep, a free, open-source code scanner. It works like a search that understands how
+code is structured and can follow a piece of information as it moves through a program. It suits this
+work for several reasons:
+
+- It reads code without installing or running it, which is safer and practical across about 100
+  unfamiliar projects.
+- One rule format covers both programming languages we target.
+- We can teach it the patterns specific to AI tools.
+- It runs quickly and offline, and because it's free, others can repeat our work.
+
+Semgrep also has limits. It loses track of information passed between separate parts of a program,
+can silently give up on very complex code, and can mistake harmless code for something dangerous. The
+repeat scans, later stages and final human review are there to make up for these gaps.
+
 Semgrep OSS taint is **intraprocedural** (it can't follow a call from a handler into a helper), so
 the scan layers three definitions of "where attacker input enters" and reconnects them in step 4.
 
@@ -176,6 +206,11 @@ CWE-22 path traversal, CWE-918 SSRF, CWE-94 code injection / unsafe deserializat
 - semgrep uses **all cores** (`--jobs nproc`).
 
 ### 4. Reach walk (reconnect helper-tier findings to tool code)
+**In plain English:** Dangerous-looking code only matters if an AI can actually reach it. So we trace
+backwards, asking "what uses this code, and what uses that?", for up to five steps to see whether the
+trail leads to the part of the software an AI controls. The trace matches on names and can be wrong,
+so its result is a hint for a person to follow, not proof.
+
 A name-based reverse call walk: from the function holding a sink, find call sites of that name,
 take *their* enclosing function, repeat until a **tool file** is reached.
 
@@ -195,6 +230,11 @@ functions create false links; dynamic dispatch (`handlers[name](args)`) breaks r
 `reach_hint` is a **lead to follow by hand**, not proof of reachability.
 
 ### 5. Context demotion (`auto_notes`) — cheap "probably-mitigated" signals
+**In plain English:** Some flagged code appears to have a safety measure right beside it. We attach a
+note and move those leads down the list, but keep them on file, because a safety check that looks
+fine can still be broken. One of our confirmed findings (nexent) was hiding behind exactly that kind
+of faulty check.
+
 Before ranking, each finding gets notes from a ±30-line window; a note **demotes it out of the
 priority queue** (but the row is kept in `findings.csv` — demoted ≠ discarded).
 
@@ -212,6 +252,10 @@ These are *demotions to review*, not dismissals — the triager still verifies e
 (e.g. a "containment nearby" note is exactly where nexent's broken check hid).
 
 ### 6. The priority queue (`is_priority`)
+**In plain English:** The most promising leads go onto a shortlist for human review: those clearly
+connected to what an AI controls, with no sign of a safety measure. Being on the shortlist means
+"worth a person's time", not "this is a bug", and most entries turn out to be harmless.
+
 A finding is **priority** iff: it is **taint-tier**, *or* it is **helper-tier with a `reach_hint`
 that starts `inside tool file` / `called from tool file`** — **and** it has **no `auto_notes`
 demotion**. Everything else stays in `findings.csv` but off the queue.
@@ -220,6 +264,11 @@ demotion**. Everything else stays in `findings.csv` but off the queue.
 > get the same verdict process; most priority rows resolve to by-design or FP (see §7).
 
 ### 7. Manual triage — the only step that declares a vulnerability
+**In plain English:** A person examines each lead and makes the call; nothing automated can declare a
+vulnerability. The key test is whether the software promises a limit, such as "read-only" or "only
+this folder", that an AI can get past. A tool openly built to run code is like a knife being sharp:
+that's its purpose, not a defect. A lock that opens with a push is a defect.
+
 For each priority candidate, the triager answers the **triage checklist**, but the decision turns
 on one question — the **finding criterion**:
 
@@ -246,12 +295,21 @@ So every candidate resolves into exactly one bucket:
 4. **dedup first** (step 8) before building a PoC.
 
 ### 8. Dedup (before any PoC or disclosure)
+**In plain English:** Before going further, we check whether someone has already reported or fixed
+the problem by searching the project's public security notices, bug reports and change history. We
+read the reports themselves, because a title can make two different problems look like the same one.
+
 Check the repo *and its parent/upstream* for a prior report: GitHub Security Advisories (GHSA),
 issues, PRs, and CHANGELOG — searching the specific vector, not just the file. Most real bugs in
 popular projects are already public or fixed. **Read the actual issue/PR bodies**, not just titles
 (hive looked like a dup from titles; reading them showed the known issues were a *different* vector).
 
 ### 9. Sandboxed PoC
+**In plain English:** We prove the problem is real by safely triggering it. We do this only on our
+own copy, inside a sealed-off environment with no internet access or real data, and the "attack" does
+something harmless, such as creating a test file. This confirms the problem without putting anyone at
+risk.
+
 On **our own clone only**, never a deployed instance. Benign payload (a canary file, no real
 secrets), inside bubblewrap (`tools/sandbox.sh`: network off, `$HOME` an empty tmpfs, `/`
 read-only, env cleared). Where feasible the PoC runs the **real target code** (import the actual
@@ -260,6 +318,11 @@ exact sink lines verbatim with a citation. The scanner never installs or runs ta
 PoCs do, in the sandbox.
 
 ### 10. CVSS & coordinated disclosure
+**In plain English:** We rate how serious the problem is on the industry-standard severity scale,
+noting anything that could raise or lower the score. We then tell the project's maintainers
+privately, usually allowing about 90 days for a fix, and publish only after the fix is out, so that
+attackers can't use our findings in the meantime.
+
 CVSS 3.1 base vector + honest sensitivity notes (config gates, `UI:N` vs `UI:R`, scope). Disclosure
 is coordinated: private report, ~90 days, publish after a fix. **The repo stays private while
 `findings/` holds unreported candidates.**
