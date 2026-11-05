@@ -151,8 +151,11 @@ it is **skipped** (or scoped to its framework packages) rather than stalling a b
 (~8k effective) was deferred and run alone.
 
 ### 3. Semgrep — three source tiers
-**In plain English:** An automated tool reads the code and flags places where information from an AI
+**In plain English:** 
+
+An automated tool reads the code and flags places where information from an AI
 could reach something dangerous, such as running a command, opening a file or querying a database.
+
 It can search narrowly (more reliable) or broadly (catches more, but with more false alarms), and it
 repeats the scan because a single pass can miss things. Everything it flags is only a lead to check,
 not a confirmed problem.
@@ -187,8 +190,13 @@ the scan layers three definitions of "where attacker input enters" and reconnect
 Validated by `make test` (21/21 fixtures incl. 8 new agent-framework fixtures) and `make recall`
 (all 4 published MCP CVEs still re-found).
 
-**Sinks (the bug classes), per language:** CWE-78 command injection, CWE-88 argument injection,
-CWE-22 path traversal, CWE-918 SSRF, CWE-94 code injection / unsafe deserialization, CWE-89 SQL.
+**Sinks (the bug classes), per language:** 
+CWE-78 command injection, 
+CWE-88 argument injection,
+CWE-22 path traversal, 
+CWE-918 SSRF, 
+CWE-94 code injection / unsafe deserialization, 
+CWE-89 SQL.
 
 **Gates / robustness inside this step:**
 - **Per-file taint timeout** `--timeout 120 --timeout-threshold 0`. Semgrep's taint fixpoint has a
