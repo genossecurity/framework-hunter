@@ -1,5 +1,6 @@
 # cloned target repos and raw scan output (heavy; live outside git)
 hunter-scan/
+mcp-scan/
 .recall/
 *.log
 
