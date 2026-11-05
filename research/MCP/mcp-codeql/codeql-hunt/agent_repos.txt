@@ -1,0 +1,7 @@
+# Exp 2 corpus — agent orchestration frameworks (Semgrep baseline = 3 findings).
+# CodeQL run here measures OVERLAP + delta against your Semgrep findings.csv.
+stevehuang0115/crewly
+TencentCloudADP/youtu-agent
+ModelEngine-Group/nexent
+aden-hive/hive
+# ...paste the rest of your 100-repo agent-framework list below.
