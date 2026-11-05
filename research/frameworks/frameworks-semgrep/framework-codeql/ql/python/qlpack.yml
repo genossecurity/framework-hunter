@@ -1,0 +1,8 @@
+name: ahmed/agent-tool-queries
+version: 0.0.1
+library: false
+dependencies:
+  codeql/python-all: "*"
+# Custom queries that treat AGENT-FRAMEWORK TOOL-HANDLER PARAMETERS as taint
+# sources — the thing the built-in security suite does NOT model (it only knows
+# conventional remote sources like HTTP params). This is the Exp-3 differentiator.

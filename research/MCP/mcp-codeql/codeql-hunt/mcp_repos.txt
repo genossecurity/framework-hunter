@@ -1,0 +1,7 @@
+# Exp 1 corpus — MCP servers (Semgrep baseline = 0 findings).
+# This is the real blind-spot test: any CodeQL hit here is PURE delta, and
+# answers whether your MCP hunt came up empty because the servers are clean or
+# because Semgrep's intraprocedural pass was blind to the flows.
+# Run the diff WITHOUT --semgrep for this corpus.
+#
+# ...paste your 141-repo MCP-server list below (one owner/repo per line).
