@@ -150,7 +150,8 @@ def process_repo(repo, work: Path, ql: Path, args):
         if (pack).exists(): queries.append(str(pack))
         rc, dt, tail = run(
             ["codeql", "database", "analyze", str(db), *queries,
-             "--format=sarif-latest", f"--output={sarif}", "--threads=0",
+             "--format=sarif-latest", f"--output={sarif}",
+             f"--threads={args.threads}", f"--ram={args.ram}",
              "--rerun", f"--timeout={args.query_timeout}"],
             stage=f"analyze:{lang}", heartbeat=15, dry=args.dry_run, dry_secs=3.0,
             logdir=logdir, timeout=args.analyze_timeout)
@@ -183,6 +184,10 @@ def main():
     ap.add_argument("--analyze-timeout", type=int, default=900,
                     help="per-language analyze timeout in seconds (default 900=15m); "
                     "a repo that exceeds it is marked analyze_timeout and skipped, to revisit later")
+    ap.add_argument("--threads", type=int, default=0,
+                    help="codeql analyze threads (0 = all cores)")
+    ap.add_argument("--ram", type=int, default=2048,
+                    help="total MB codeql may use for analyze (raises JVM heap; default was ~2.7G and OOM'd big JS repos)")
     ap.add_argument("--query-timeout", type=int, default=180,
                     help="CodeQL per-query evaluation timeout in seconds (default 180); a single "
                     "pathological query is skipped while the other queries on that repo still run")
