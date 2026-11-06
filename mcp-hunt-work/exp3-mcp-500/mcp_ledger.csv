@@ -1,0 +1,33 @@
+repo,file,line,rule,verdict,reason,lane
+# ---- MCP-392 chunk 1 (smallest 100) dual-lane ----
+ida-pro-mcp/ida-pro-mcp,src/ida_pro_mcp/ida_mcp/api_python.py,157,agent/code-injection,by-design,"exec(code) runs Python IN IDA Pro; the MCP tool's stated purpose (RE automation)",lane1
+mcp-for-blender/mcp-for-blender,addon.py,2387,agent/code-injection,by-design,"runs code in Blender; the tool purpose",lane1
+lane1/mcp-tool-cluster,bash-sql-code-tools,0,agent/cmd-injection,by-design,"24 lane-1 hits: MCP tool handlers whose purpose IS code/shell/sql exec (Mini-Agent bash_tool, aisuite git/shell, whatsapp audio, Office-Word, lanhu/pal/gemini DB tools, Continuous-Claude sandbox); same as 141-MCP all-by-design",lane1
+u14app/deep-research,src/app/api/crawler/route.ts,19,js/request-forgery,by-design,"POST /api/crawler fetch(url) of body URL returning content = SSRF, BUT it's the research tool's crawler (fetching user URLs is the feature) on Vercel Edge (constrained internal reach); hardening gap (no internal/metadata allowlist) not a clear vuln",lane2
+cjo4m06/mcp-shrimp-task-manager,tools/task-viewer/src,0,js/client-side-request-forgery,fp,"18 hits: frontend fetch in React task-viewer UI (client-side CSRF), low-value; also FireRed/aisuite web UIs",lane2
+# ---- chunk 2 (101-200) dual-lane ----
+Butterbase/butterbase,services/control-api/src/routes/rls.ts,696,js/sql-injection,fp,"BaaS RLS mgmt: policy_name zod regex ^[a-z_][a-z0-9_]*$, command/role enums, table_name isReservedTable+existence check, expressions validateExpressionSafety; auto-api.ts uses parameterized query(text,values). Defensive like InsForge (20+ hits)",lane2
+vernu/textbee,api/src/auth/auth.service.ts,672,js/sql-injection,fp,"Mongoose/MongoDB ODM (apiKeyModel.findById/.save), NOT raw SQL; CodeQL mis-flagged ODM",lane2
+vibe-research/Vibe-Research,orchestrator/src/local_agent_runtime.ts,603,js/command-line-injection,by-design,"local agent runtime runs agent-dispatched commands; executor purpose (10 hits)",lane2
+davinci-resolve-mcp/davinci-resolve-mcp,src/utils/media_analysis.py,2546,py/command-line-injection,by-design,"DaVinci Resolve MCP media tools run ffmpeg/media cmds; the tool purpose (ssrf = media URL fetch)",lane2
+lane1/mcp-tool-cluster-c2,bash-sql-code-media,0,agent/cmd-injection,by-design,"61 lane-1 hits: MCP tool handlers (Mini-Agent/aisuite/serena/davinci/Agentic-Bug-Hunter fuzzer bash+code+sql tools, lanhu/pal/Horizon DB tools); ADR=benchmark fixtures, Skill_Seekers=examples. All by-design/trusted",lane1
+cluster/frontend-tarslip-c2,web-ui-downloads,0,js/client-side-request-forgery,fp,"frontend CSRF (playwriter/FireRed web UI) + tarslip in download/install scripts (SeleniumBase sb_install, zotero pdf download, serena lang-server); by-design/low-value",lane2
+# ---- chunk 3 (201-300) dual-lane ----
+1Panel-dev/MaxKB,apps/chat/views/chat.py,52,py/full-ssrf,fp,"DEAD CODE: ResourceProxy class defined at chat.py:44 but NEVER imported or routed (confirmed via clone: appears only at definition, not in any urls.py). SSRF sink unreachable - no URL maps to it. CodeQL flagged the flow regardless of reachability",lane2
+Vexa-ai/vexa,core/agent/shared/gitexec.py,559,py/command-line-injection,fp,"subprocess.run(argv) argv form, no shell; careful git wrapper (checks .git, pins fds)",lane2
+jarvis-registry/jarvis-registry,auth-server/src/auth_server/routes/oauth_flow.py,1387,py/full-ssrf,fp,"OAuth token_url/user_info_url from CONFIGURED provider_config (Google/GitHub/Entra), not user input; standard OAuth flow",lane2
+devlikeapro/waha,src/core/storage/mongo/MongoSessionConfigRepository.ts,20,js/sql-injection,fp,"MongoDB/Mongoose ODM, NOT raw SQL (6 hits); CodeQL mis-flagged NoSQL",lane2
+autoclip/autoclip,backend/utils/video_processor.py,279,py/command-line-injection,by-design,"ffmpeg video processing (cover/video_editor/publish_export); by-design media tool (7 hits)",lane2
+QuantDinger/QuantDinger,backend_api_python/app/utils/safe_exec.py,558,py/code-injection,by-design,"safe_exec sandboxed exec for quant strategies; running user strategy code is the product",lane2
+lane1/mcp-tool-cluster-c3,bash-sql-code-media,0,agent/cmd-injection,by-design,"116 lane-1 hits: MCP tool handlers (bash/sql/code/media/git tools across ADR/QuantDinger/autoclip/fast-agent/kagent/CodeGraphContext etc); ADR=benchmark fixtures, Skill_Seekers=examples. All by-design/trusted",lane1
+cluster/frontend-csrf-c3,web-ui,0,js/client-side-request-forgery,fp,"53AIHub + many React front-ends: frontend fetch (client-side CSRF), low-value",lane2
+# ---- chunk 4 (301-392) dual-lane — MCP-392 COMPLETE ----
+open-webui/open-webui,backend/open_webui/utils/plugin.py,241,py/code-injection,by-design,"exec(content) admin plugin/tool/function loading system; installing code is the feature (admin-gated)",lane2
+open-webui/open-webui,backend/open_webui/routers/images.py,942,py/full-ssrf,fp,"GUARDED: validate_url()+get_ssrf_safe_session() with DNS-rebinding + redirect revalidation (12 SSRF routers all use the ssrf-safe session). CodeQL misses it",lane2
+AiToEarn/AiToEarn,project/aitoearn-backend/libs/mongodb/src/repositories/account.repository.ts,126,js/sql-injection,fp,"MongoDB repositories (mongodb/src), NOT raw SQL; CodeQL mis-flagged NoSQL ODM (17 hits)",lane2
+magic/magic,frontend/magic-web/packages/html-sandbox/src/iframe-runtime.ts,245,js/code-injection,by-design,"html-sandbox iframe runtime; sandboxed code execution is the component purpose",lane2
+lobehub/lobe-chat,public/_dangerous_local_dev_proxy.html,59,js/code-injection,by-design,"_dangerous_local_dev_proxy = dev-only proxy (name says it); not production path",lane2
+SimpleMem/SimpleMem,simplemem/multimodal/processors/video_processor.py,191,py/command-line-injection,by-design,"ffmpeg video processing; by-design media tool",lane2
+cluster/ssrf-fetch-tools-c4,user-url-fetch,0,py/full-ssrf,by-design,"Kiln/comfyui_LLM_party/super-agent-party/PDFMathTranslate/treg = user-provided URL fetch tools or OAuth provider URLs; by-design",lane2
+cluster/cli-tools-c4,cli-childproc,0,js/command-line-injection,trusted-input,"cc-haha/bifrost/FlyEnv/agent-teams-ai childProcess = CLI/dev tooling, operator-controlled",lane2
+lane1/mcp-tool-cluster-c4,bash-sql-code-media,0,agent/cmd-injection,by-design,"~180 lane-1 hits: MCP tool handlers (code/shell/sql/media tools across astron-rpa/redamon/pipeshub/magic/fast-agent/kagent etc); ADR/ai-engineering-hub=benchmark/course fixtures. All by-design/trusted",lane1

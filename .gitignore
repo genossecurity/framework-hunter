@@ -19,3 +19,17 @@ __pycache__/
 
 # discovery output (regenerate with `make discover`)
 repos.txt
+
+# mcp-hunt-work: scan tree merged into the repo.
+# Track deliverables (reports, ledgers, findings.csv, done.jsonl, summaries);
+# ignore heavy generated artifacts (CodeQL DBs, SARIFs, cloned sources).
+mcp-hunt-work/**/db/
+mcp-hunt-work/**/sarif/
+mcp-hunt-work/**/src/
+mcp-hunt-work/**/shadow/
+# intermediate/regenerable scan artifacts (not deliverables)
+mcp-hunt-work/poc/
+mcp-hunt-work/**/chunks/
+mcp-hunt-work/**/chunks-dry/
+mcp-hunt-work/**/batches/
+mcp-hunt-work/**/results/

@@ -1,0 +1,60 @@
+repo,file,line,rule,verdict,reason
+# MCP corpus (Exp 1, Semgrep baseline 0). run 2 packs + isMcpToolHandler. batch 1 triage.
+ruvnet/agentdb,src/mcp/agentdb-mcp-server.ts,2822,agent/sql-injection-js,fp,"table/col from fixed map; IDs bound ? params (toRecordId); only safe interpolation"
+ruvnet/agentdb,src/mcp/agentdb-mcp-server.ts,2823,agent/sql-injection-js,fp,"same: parameterized delete"
+vouchington/vouchington-tooling,src/mcp-server/worktree.mts,20,agent/cmd-injection-js,fp,"execFileAsync(command,args) array args, no shell"
+getsentry/XcodeBuildMCP,src/utils/command.ts,69,agent/cmd-injection-js,fp,"spawn(executable,args) array args, no shell; build-runner MCP by-design"
+# STRUCTURAL: the bulk of non-test JS hits are CLI command-handler callbacks (src/cli/commands/*),
+# matched because AgentToolParamJs regex includes command|action|handler -> commander.js .command()/.action().
+# These are CLI tools (operator args), NOT MCP-tool-reachable. Tighten JS source to server.tool/setRequestHandler for the MCP corpus.
+# ---- batches 1-2 deep triage (after JS source tightening) ----
+czlonkowski/n8n-mcp,src/database/database-adapter.ts,195,agent/sql-injection-js,fp,"thin passthrough prepare(sql)->db.prepare; SQL internal on bundled read-only node-docs DB"
+abhigyanpatwari/GitNexus,eval/analysis/analyze_results.py,185,agent/cmd-injection,fp,"subprocess.run(cmd_array) no shell; SWE-bench eval harness, not MCP server"
+getsentry/XcodeBuildMCP,.agents/skills/warden-sweep/scripts/_utils.py,15,agent/cmd-injection,fp,"subprocess.run(args_array) no shell; internal .agents tooling, not MCP-reachable"
+microsoft/azure-devops-mcp,src/tools/pipelines.ts,515,agent/path-injection-js,by-design,"destinationPath is the artifact-download target; writing where user asks is the tool purpose"
+chrisryugj/kordoc,src/mcp/shared.ts,57,agent/path-injection-js,fp,"safeOutputPath(): resolve + ext allowlist + symlink rejection; guarded sanitizer"
+southleft/figma-console-mcp,src/core/design-system-extraction-tools.ts,132,agent/path-injection-js,by-design,"tool scans user-specified target dirs by design (docs say pass absolute paths)"
+# STRUCTURAL: agent/path-injection-js bulk (~105 non-partial) = by-design path-taking MCP file tools or guarded resolvers.
+# All 5 code/cmd/sql high-value hits = FP (safe subprocess arrays, parameterized/passthrough SQL). Zero reportable.
+# ---- batch 3 ----
+mcp-use/mcp-use,libraries/python/mcp_use/client/code_executor.py,124,agent/code-injection,by-design,"CodeExecutor exec(compile(code)); executing agent code is the feature"
+mcp-use/mcp-use,libraries/python/mcp_use/client/client.py,516,agent/sql-injection,fp,"wide SqlSink matched code_executor.execute(code) dispatch, not SQL"
+# ---- batch 3 path/ssrf ----
+browserstack/mcp-server,src/lib/upload-validator.ts,40,agent/path-injection-js,by-design,"realpathSync on the file-to-upload path; upload tool takes a path"
+browserstack/mcp-server,src/lib/apiClient.ts,185,agent/ssrf-js,fp,"generic API client .get(url); url from fixed BrowserStack endpoints"
+meshy-dev/meshy-mcp-server,src/services/file-utils.ts,35,agent/path-injection-js,by-design,"readFile(filePath) after ext validation; image tool reads user's image"
+jgraph/drawio-mcp,mcp-tool-server/src/index.js,830,agent/path-injection-js,fp,"assertPagePath(filePath) guard restricts which files tools may touch"
+Serdnaley/metabase-mcp,src/services/exports.ts,34,agent/path-injection-js,by-design,"checkOutput requires absolute path + overwrite check; export tool"
+MetaMask/device-mcp,src/hermes/hermes-cdp.ts,317,agent/ssrf-js,fp,"fetch(localhost:port+path); path from fixed DISCOVERY_PATHS, not user input"
+# NOTE: batch-3 big finders (claude-mem 591, corsair 131, context7 97, context-mode 86) have ZERO agent hits -> counts are built-in-suite noise, not delta.
+# ---- batch 4 ----
+benborla/mcp-server-mysql,src/db/index.ts,111,agent/sql-injection-js,by-design,"MCP server whose purpose is running model-supplied SQL; sql IS the tool arg (executeWriteQuery), not concatenated untrusted data; read-only default + permission checks"
+benborla/mcp-server-mysql,src/db/index.ts,437,agent/sql-injection-js,by-design,"same: executeReadOnlyQuery runs model-supplied SQL under SET SESSION TRANSACTION READ ONLY"
+# ---- MCP batch 5 (b04) ----
+nitrocloudofficial/nitrostack,typescript/packages/cli/src/commands/init.ts,172,agent/path-injection-js,fp,"source is projectName from inquirer.prompt() (interactive CLI scaffolding, local operator input) not an MCP tool handler; 379 hits inflated ~16x by vendored sample-apps/*/nitrostack-main self-copies"
+artokun/comfyui-mcp,src/services/training-jobs.ts,180,agent/path-injection-js,by-design,"real server.tool(args) handler -> fs path, but comfyui-mcp is a LOCAL ComfyUI file/model/training manager; model-controlled paths on user's own machine are the tool purpose (233 path hits, same class as agent-zero/hive file-ops)"
+angelogiacco/elevenlabs-mcp,elevenlabs_mcp/server.py,164,agent/path-injection,by-design,"TTS/audio MCP tool writes output to model-given local path; file output path is the tool feature"
+abhigyanpatwari/GitNexus,eval/analysis/analyze_results.py,185,agent/cmd-injection,fp,"subprocess.run(cmd) where cmd is a LIST (argv, no shell=True) -> no shell injection; also SWE-bench eval harness, not MCP server runtime"
+abhigyanpatwari/GitNexus,eval/analysis/analyze_results.py,164,agent/path-injection,trusted-input,"benchmark eval tooling paths (run_id/preds_path), not MCP runtime attack surface"
+asklokesh/loki-mode,mcp/server.py,192,agent/path-injection,by-design,"MCP server file tool reads/writes model-given local path; by-design local file access"
+# ---- MCP batch 6 (b05) ----
+DayuanJiang/next-ai-draw-io,packages/mcp-server/src/index.ts,439,agent/cmd-injection-js,fp,"session_id tool param constrained by zod .regex(/^mcp-[a-z0-9-]{1,64}$/) before reaching spawn('start \"\" \"${url}\"',{shell:true}); regex strips all shell metachars. CodeQL doesn't model zod guard. Also localhost-only Windows-only browser open"
+sap/mdk-mcp-server,src/utils.ts,405,agent/cmd-injection-js,by-design,"execSync(command) is a command-runner MCP tool (runs MDK/yeoman CLI, yo, .cmd files); executing CLI commands is the server's purpose"
+hypequery/hypequery,python/hypequery/src/hypequery/contrib/utils/lazy_executor.py,41,agent/sql-injection,fp,"wide SqlSink matched query-builder .execute(compiled) where compiled is a CompiledQuery object (typed ClickHouse builder), not raw SQL; same pattern as txtai/mem0"
+sap/mdk-mcp-server,*,*,agent/path-injection-js,by-design,"49 path hits: MDK project scaffolding/file MCP tool, model-given local project paths are the tool purpose"
+jmagly/aiwg,*,*,agent/path-injection-js,by-design,"44 path hits: local AI-workflow-generator file tool, model-given local paths by design"
+DayuanJiang/next-ai-draw-io,*,*,agent/path-injection-js,by-design,"18 path hits: local draw.io diagram save/preview files; session-scoped localhost paths"
+# ---- MCP batch 7 (b06) ----
+nikolai-vysotskyi/trace-mcp,src/db/repositories/file-repository.ts,240,agent/sql-injection-js,fp,"SELECT ... WHERE path IN (${placeholders}) is fully PARAMETERIZED: placeholders=chunk.map(()=>'?').join(',') interpolates only ?-marks, values bound via .all(...chunk); no user data enters the string"
+classfang/ssh-mcp,src/tools/local-path.ts,263,agent/path-injection-js,by-design,"SSH MCP server file-transfer tool; model-given local upload/download paths are the tool purpose (4 hits in local-path.ts)"
+harness/mcp-server,*,*,agent/path-injection-js,by-design,"26 custom hits in enterprise Harness MCP API client; model-given resource paths to the Harness API, by-design client paths"
+nikolai-vysotskyi/trace-mcp,*,*,agent/path-injection-js,by-design,"104 path hits: local code-trace/indexing tool, model-given local file paths by design"
+# ---- MCP batch 8 (b07) ----
+Ashish-Bansal/playwright-mcp,src/mcp/eval.ts,76,agent/code-injection-js,by-design,"secureEvalAsync runs model-supplied JS against Playwright page via vm.runInContext; code execution IS the tool. vm sandbox (nulls process/require) is best-effort (author: 'Not super secure') + Node vm is escapable via constructor chains = weak guard not a trust boundary. Same class as Qwen-Agent/DeepAnalyze/Agent-S code executors"
+nitrocloudofficial/nitrostack,sample-apps/SUMO-AI-MCP/sumo_server.py,370,agent/cmd-injection,trusted-input,"full-coverage re-run: vendored demo app bundled in repo (also dup under seizure-monitor/), not nitrostack's own framework code"
+nitrocloudofficial/nitrostack,sample-apps/remitwise-AI-project/backend/agents/orchestrator/executor.py,118,agent/sql-injection,trusted-input,"full-coverage re-run: vendored demo app, not framework code"
+mastra-ai/mastra,*,*,agent/*,fp,"RE-RUN with --ram 24000 --threads 16: now FULLY COVERED (analyze 6m52s, all 110 queries ran). 0 agent/* hits (278 findings all built-in). Earlier analyze_partial was a RESOURCE limit (default 2.7G heap), not a real miss. Clean on the agent pack."
+JKHeadley/instar,scripts/collect-metrics.py,98,agent/cmd-injection,fp,"re-run full custom coverage: subprocess.run(cmd) with cmd a LIST (no shell=True) in a dev metrics script; no shell injection + dev tooling"
+JKHeadley/instar,packages/threadline-mcp/src/server.ts,121,agent/path-injection-js,by-design,"9 path hits: fixed MCP state files under ~/.threadline (identity.json/profile.json, mode 0o600/0o700); local state storage by design. Custom agent queries DID complete (only built-in queries hit query-timeout)"
+Cotal-AI/Cotal,*,*,agent/*,fp,"RE-RUN with --ram 24000 --threads 16: OOM gone, now FULLY COVERED (ok, 450 findings). 0 agent/* hits (all built-in). Earlier analyze_failed was a 2.7G-heap OOM (RESOURCE limit), not a real miss. Clean on the agent pack."
+ChristopherVR/ooxml,*,*,agent/*,fp,"RE-RUN full coverage (ok, 43 findings all built-in). 0 agent/* hits. OOXML document library, no MCP tool handlers. Clean."

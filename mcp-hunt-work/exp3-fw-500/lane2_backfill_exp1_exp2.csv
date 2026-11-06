@@ -1,0 +1,15 @@
+repo,file,line,rule,verdict,reason,corpus
+# LANE-2 BACKFILL on exp1 (141 MCP) + exp2 (100 agent) — SARIFs survived, DBs re-cloned for triage
+stevehuang0115/crewly,backend/src/services/provisioning/deployment-orchestrator.service.ts,74,js/command-line-injection,fp,"host unescaped in exec ssh string BUT callers pass dropletIp (system-generated DigitalOcean provisioning IP) not user input; command IS single-quote-escaped",exp1
+heroku/heroku-mcp-server,src/tools/deploy-to-heroku.ts,322,js/command-line-injection,fp,"execSync(git remote add heroku-${name} ${git_url}); name+git_url from Heroku API (app names Heroku-constrained alnum-dash)",exp1
+Zipstack/unstract,x2text-service/app/controllers/controller.py,51,py/full-ssrf,by-design,"SSRF to TENANT-CONFIGURED adapter URL (user's own unstructured-API endpoint/egress); by-design per code comments",exp2
+t8y2/dbx,apps/desktop/src/lib/mongo/mongoScriptRecorder.ts,89,js/code-injection,by-design,"new Function(script) runs USER's own mongo script in a DB GUI desktop client; running your typed query is the feature",exp1
+asklokesh/loki-mode,dashboard/server.py,4387,py/command-line-injection,fp,"Popen(supervisor_args) LIST form, validated build fields never reach shell (code comment)",exp1
+anis-marrouchi/agentx,src/actions/runner.ts,70,js/command-line-injection,by-design,"action runner exec(cmd) runs model/config-defined action commands; the runner's purpose",exp1
+agent0ai/agent-zero,helpers/git.py,448,py/command-line-injection,fp,"subprocess.run([...,'--',url,dest]) argv form + -- option-injection guard, no shell",exp2
+# class-level verdicts (not individually re-cloned):
+Klavis-AI/klavis,mcp_servers,0,js/request-forgery,by-design,"102 hits: MCP server API clients (woocommerce/salesforce/etc.) fetch the CONFIGURED upstream service; that's what the connector does",exp2
+cluster/frontend-csrf,web-ui-workers-demos,0,js/client-side-request-forgery,fp,"Cotal/ooxml/GitNexus/ruvector/openapi-mcp frontend fetch in web UI workers + demos; client-side, low-value",exp1
+cluster/planted-vulns,bench-fixtures,0,py/code-injection,by-design,"ruvnet/metaharness + GitNexus bench/fixtures/planted-vulns = INTENTIONAL benchmark vulnerabilities, not real code",exp1
+cluster/ssrf-user-url,fetch-tools,by-design,py/full-ssrf,by-design,"Qwen-Agent/sparrow/agent-zero model_search SSRF = user-provided URL fetch tools (by-design); SuperAGI hugging_face already known-public in exp2 ledger",both
+steel-dev/steel-browser,api/src/templates/live-session-streamer.ejs,521,js/reflected-xss,CANDIDATE-REAL,"reflected XSS: request.query.interactive -> reply.view -> <script>const interactive = <%= interactive %>; EJS <%= HTML-escapes <>&'\" but NOT ;()/ so JS-context payload executes. handleGetSessionStream (sessions.controller.ts:147) passes query param unvalidated. theme is safe (double-quoted HTML attr). On current main. NEEDS dedup",exp2
