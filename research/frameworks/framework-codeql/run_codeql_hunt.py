@@ -104,7 +104,8 @@ def detect_langs(src: Path):
         s = p.suffix.lower()
         if s == ".py": langs.add("python")
         elif s in (".ts", ".tsx", ".js", ".jsx", ".mjs", ".cts", ".mts"): langs.add("javascript")
-        if len(langs) == 2: break
+        elif s == ".rs": langs.add("rust")
+        if len(langs) == 3: break
     return langs or {"python"}
 
 def count_sarif(path: Path):

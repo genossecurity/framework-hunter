@@ -1,0 +1,4 @@
+# scenario.sh run artifacts (regenerated each run; contain only mock/fake data)
+audited-activity.log
+EXFIL-to-attacker.txt
+.home/
